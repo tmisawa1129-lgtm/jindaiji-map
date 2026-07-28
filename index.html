@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>📍深大寺MAP</title>
+<meta name="description" content="深大寺と神代植物公園まわりの蕎麦・茶菓・かき氷・見所を、ジャンル別に地図と一覧でまとめたもの。">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ja_JP">
+<meta property="og:site_name" content="深大寺MAP">
+<meta property="og:title" content="📍深大寺MAP">
+<meta property="og:description" content="深大寺と神代植物公園まわりの蕎麦・茶菓・かき氷・見所を、ジャンル別に地図と一覧でまとめたもの。">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%93%8D%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light dark;
+  --ground:#F2F4EF; --card:#FBFCFA;
+  --ink:#16241D; --ink-2:#53645A; --ink-3:#87958C;
+  --ai:#1D4A57; --yusui:#3E8C9B; --shu:#A8402A;
+  --koke:#7A8A66; --koke-2:#B9C4AC;
+  --line:#CBD5CB; --on-accent:#FFFFFF;
+  --st-open-bg:#E2EDE6;   --st-open-fg:#245C3B;
+  --st-closed-bg:#F3E0DC; --st-closed-fg:#A8402A;
+  --st-check-bg:#FBEFD6;  --st-check-fg:#8A5B12;
+  --disp:"Shippori Mincho B1",serif;
+  --body:"Zen Kaku Gothic New",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root{
+    --ground:#131A17; --card:#1A231F;
+    --ink:#E9EEE8; --ink-2:#A7B4AA; --ink-3:#78867C;
+    --ai:#63A7B8; --yusui:#79C4D0; --shu:#DE7458;
+    --koke:#94A67E; --koke-2:#5E6E52;
+    --line:#2F3C35; --on-accent:#101C1A;
+    --st-open-bg:#1D3728;   --st-open-fg:#8FD3A8;
+    --st-closed-bg:#3B241E; --st-closed-fg:#EC9A83;
+    --st-check-bg:#392F1B;  --st-check-fg:#E2BE76;
+  }
+  .area-rule{opacity:.55}
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;padding-bottom:64px}
+.wrap{max-width:680px;margin:0 auto;padding:0 18px}
+
+.hero{padding:40px 0 0}
+.hero-eyebrow{font-size:11px;letter-spacing:.28em;color:var(--yusui);font-weight:700;margin-bottom:14px}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(30px,8.4vw,50px);line-height:1.2;letter-spacing:.03em;white-space:nowrap}
+.hero h1 em{font-style:normal;color:var(--ai);letter-spacing:.12em;margin-left:.18em}
+
+/* ---------- 地図 ---------- */
+.maps{margin-top:24px;display:flex;flex-direction:column;gap:14px}
+.mapfig{border:1px solid var(--line);border-radius:5px;background:var(--card);padding:12px 10px 8px}
+.mapfig figcaption{
+  font-family:var(--disp);font-size:12.5px;letter-spacing:.1em;color:var(--ink-2);
+  padding:0 6px 8px;display:flex;justify-content:space-between;align-items:baseline;
+}
+.mapfig figcaption span{font-family:var(--body);font-size:10.5px;color:var(--ink-3);letter-spacing:.04em}
+.mapfig svg{display:block;width:100%;height:auto}
+.map-a svg{max-height:430px;margin:0 auto}
+.dot{cursor:pointer}
+.dot circle{stroke:var(--card);stroke-width:2;transition:r .18s}
+.dot text{font-family:var(--body);font-size:10px;font-weight:700;fill:var(--on-accent);pointer-events:none}
+.dot.s-in circle{fill:var(--ai)}
+.dot.s-shade circle{fill:var(--koke)}
+.dot.s-water circle{fill:var(--yusui)}
+.dot.s-sun circle{fill:var(--shu)}
+.dot.is-off{display:none}
+.dot.is-active circle{r:14;stroke:var(--yusui);stroke-width:3}
+.scale line{stroke:var(--ink-3);stroke-width:1.2}
+.scale text{font-family:var(--body);font-size:9.5px;fill:var(--ink-3);letter-spacing:.04em}
+
+.legend{display:flex;flex-wrap:wrap;gap:5px 16px;padding:14px 0 0}
+.legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
+.chip-band{width:9px;height:9px;border-radius:50%;flex:none}
+.b-in{background:var(--ai)} .b-shade{background:var(--koke)}
+.b-water{background:var(--yusui)} .b-sun{background:var(--shu)}
+
+/* ---------- タブ：風鈴の短冊 ---------- */
+.tabs{position:sticky;top:0;z-index:5;background:var(--ground);padding-bottom:18px;margin-top:22px}
+.tabs-row{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-top:14px;border-top:1px solid var(--line)}
+.tabs-row::-webkit-scrollbar{display:none}
+.tabs-row button{
+  position:relative;flex:none;cursor:pointer;
+  font-family:var(--disp);font-size:14.5px;font-weight:500;letter-spacing:.1em;white-space:nowrap;
+  padding:9px 15px 8px;border-radius:0 0 5px 5px;
+  border:1px solid var(--line);border-top:none;background:var(--card);color:var(--ink-2);
+  transition:background .18s,color .18s,border-color .18s,transform .18s;
+}
+.tabs-row button::before{content:"";position:absolute;left:50%;top:-14px;width:1px;height:14px;background:var(--line);transition:background .18s,height .18s}
+.tabs-row button:hover{transform:translateY(2px)}
+.tabs-row button[aria-pressed="true"]{background:var(--ai);border-color:var(--ai);color:var(--on-accent);transform:translateY(3px)}
+.tabs-row button[aria-pressed="true"]::before{background:var(--ai);height:17px}
+.tabs-row button:focus-visible{outline:2px solid var(--yusui);outline-offset:2px}
+.tab-n{font-family:var(--body);font-size:10px;font-weight:700;margin-left:8px;opacity:.55;font-variant-numeric:tabular-nums;letter-spacing:0}
+
+/* ---------- 一覧 ---------- */
+.area{margin-top:30px}
+.area-head{display:flex;align-items:baseline;gap:11px;margin-bottom:4px}
+.area-head h2{font-family:var(--disp);font-size:21px;font-weight:700;letter-spacing:.05em}
+.area-head .area-sub{font-size:11.5px;color:var(--ink-3);letter-spacing:.04em}
+.area-rule{height:1px;background:var(--ink);opacity:.85;margin-bottom:16px}
+
+.card{
+  position:relative;background:var(--card);border:1px solid var(--line);border-left:none;
+  border-radius:0 4px 4px 0;padding:15px 16px 14px 17px;margin-bottom:10px;
+  display:flex;flex-direction:column;gap:9px;scroll-margin-top:88px;
+}
+.card::before{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:5px;border-radius:4px 0 0 4px}
+.card.shade-in::before{background:var(--ai)}
+.card.shade-shade::before{background:repeating-linear-gradient(135deg,var(--koke) 0 4px,var(--koke-2) 4px 8px)}
+.card.shade-water::before{background:var(--yusui)}
+.card.shade-sun::before{background:var(--shu)}
+.card.is-active{border-color:var(--yusui);box-shadow:0 0 0 1px var(--yusui)}
+
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.card-title{display:flex;align-items:baseline;gap:9px;min-width:0}
+.card-num{
+  font-family:var(--body);font-size:10.5px;font-weight:700;flex:none;
+  width:21px;height:21px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
+  color:var(--on-accent);font-variant-numeric:tabular-nums;transform:translateY(2px);
+  border:none;padding:0;cursor:pointer;
+  transition:box-shadow .15s,transform .15s;
+}
+.card-num:hover{box-shadow:0 0 0 3px var(--yusui);transform:translateY(2px) scale(1.08)}
+.card-num:focus-visible{outline:2px solid var(--yusui);outline-offset:2px}
+.n-in{background:var(--ai)} .n-shade{background:var(--koke)}
+.n-water{background:var(--yusui)} .n-sun{background:var(--shu)}
+.card-name{font-family:var(--disp);font-size:18px;font-weight:700;letter-spacing:.03em;line-height:1.35}
+.card-rating{font-size:11.5px;color:var(--ink-3);white-space:nowrap;padding-top:5px;font-variant-numeric:tabular-nums}
+.card-note{font-size:13.5px;color:var(--ink-2);line-height:1.65}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;letter-spacing:.05em;padding:3px 9px;border-radius:3px;align-self:flex-start}
+.st-open{background:var(--st-open-bg);color:var(--st-open-fg)}
+.st-closed{background:var(--st-closed-bg);color:var(--st-closed-fg)}
+.st-check{background:var(--st-check-bg);color:var(--st-check-fg)}
+.status small{font-weight:500;letter-spacing:0;opacity:.85}
+.hours{font-size:12px;color:var(--ink-3);font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.hours a[href^="tel:"]{
+  color:var(--ai);font-weight:700;text-decoration:none;
+  border-bottom:1px solid currentColor;padding:2px 0;
+}
+.hours a[href^="tel:"]:focus-visible{outline:2px solid var(--yusui);outline-offset:2px}
+
+.links{display:flex;gap:8px;margin-top:2px}
+.links a,.links button{
+  flex:1;text-align:center;text-decoration:none;cursor:pointer;
+  font-family:var(--body);font-size:12.5px;font-weight:500;padding:8px 6px;border-radius:3px;
+  border:1px solid var(--line);background:transparent;color:var(--ink-2);
+  transition:background .15s,color .15s,border-color .15s;
+}
+.links a:hover,.links button:hover{background:var(--ai);border-color:var(--ai);color:var(--on-accent)}
+.links a:focus-visible,.links button:focus-visible{outline:2px solid var(--yusui);outline-offset:2px}
+
+.empty{padding:40px 0;text-align:center;color:var(--ink-3);font-size:13.5px}
+.empty[hidden]{display:none}
+footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3);line-height:1.8}
+footer b{color:var(--ink-2)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="hero-eyebrow">調布市 深大寺・神代植物公園</div>
+    <h1>📍深大寺<em>MAP</em></h1>
+  </header>
+
+  <div class="maps">
+    <figure class="mapfig map-a">
+      <figcaption>深大寺・神代植物公園<span>上が北</span></figcaption>
+      <div id="svg-a"></div>
+    </figure>
+    <figure class="mapfig map-b">
+      <figcaption>調布駅前・天神通り<span>上が北</span></figcaption>
+      <div id="svg-b"></div>
+    </figure>
+  </div>
+
+  <div class="legend">
+    <span class="legend-item"><i class="chip-band b-in"></i>屋内</span>
+    <span class="legend-item"><i class="chip-band b-shade"></i>木陰・外席</span>
+    <span class="legend-item"><i class="chip-band b-water"></i>水辺</span>
+    <span class="legend-item"><i class="chip-band b-sun"></i>日向あり</span>
+  </div>
+
+  <nav class="tabs" aria-label="ジャンルで絞り込む">
+    <div class="tabs-row" id="tabs-row"></div>
+  </nav>
+
+  <main id="list"></main>
+  <p class="empty" id="empty" hidden>この条件に合うものはない。</p>
+
+  <footer>
+    <b>営業状況は8月11日（火）時点。</b>お盆は臨時休業が出やすいので、赤と黄色の札は電話で確認を。<br>
+    地図の位置は目安。近いものは重ならないようずらしてある。<br>
+    評価と営業時間はGoogleマップより。
+  </footer>
+
+</div>
+
+<script>
+const MAPDATA = {"a": {"w": 600, "h": 860, "bar": 110.3, "pts": [{"id": "jinja", "x": 271.3, "y": 575.9}, {"id": "tamanoya", "x": 394.8, "y": 541.1}, {"id": "yusui", "x": 92.4, "y": 599.7}, {"id": "matsuba", "x": 365.9, "y": 539.5}, {"id": "daishi", "x": 160.1, "y": 587.9}, {"id": "ikkyuan", "x": 347.1, "y": 626.6}, {"id": "tamon", "x": 550.9, "y": 763.7}, {"id": "kiyoshi", "x": 263.4, "y": 667.3}, {"id": "yaoki", "x": 430.9, "y": 693.2}, {"id": "ameya", "x": 378.8, "y": 647.1}, {"id": "baigetsu", "x": 309.9, "y": 645.0}, {"id": "gyokusendo", "x": 105.6, "y": 633.4}, {"id": "jindaiji", "x": 445.6, "y": 616.7}, {"id": "jindaipark", "x": 241.6, "y": 156.4}, {"id": "suisei", "x": 554.0, "y": 813.9}, {"id": "greensalon", "x": 46.0, "y": 46.0}]}, "b": {"w": 600, "h": 258, "bar": 168.4, "pts": [{"id": "tenjin", "x": 127.0, "y": 124.8}, {"id": "anand", "x": 87.2, "y": 203.9}, {"id": "azukiya", "x": 59.5, "y": 212.5}, {"id": "kitaro", "x": 46.0, "y": 170.0}, {"id": "kumokuma", "x": 554.0, "y": 46.0}, {"id": "oimono", "x": 468.4, "y": 127.5}]}};
+
+const SHOPS = [
+  /* ===== 夏のもの ===== */
+  {id:"hoozuki", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["natsu"], name:"ほおずきハッピーゲート", shade:"sun",
+   status:"open", statusText:"8月16日まで", hours:"深大寺 山門",
+   note:"提灯に見立てたほおずきを並べて精霊を迎える、深大寺の夏の設え。山門に例年7月半ばから8月半ばまで置かれる。同じ期間、夏の特別御朱印とお守りが授与される（なくなり次第終了）。鬼燈まつり本体は例年7月中旬から下旬の3日間。",
+   map:"https://maps.google.com/?cid=8224161598012187145"},
+  {id:"jinja", area:"sando", panel:"a", noFood:true, genres:["natsu","spot"], name:"深沙堂", shade:"water",
+   status:"open", statusText:"通年・無料", hours:"境内西端 ／ 終日",
+   note:"深大寺の名の由来である水神、深沙大王を祀る御堂。現在の建物は1968年の再建で、市の有形文化財。天井に龍の絵がある。まわりを湧水が流れ、本堂周辺より人が少ない。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺+深沙大王堂"},
+  {id:"fuurin", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["natsu"], name:"朝顔と風鈴回廊", shade:"shade",
+   status:"open", statusText:"8月30日まで", hours:"火 9:30–17:00 ／ 入園500円",
+   note:"神代植物公園の企画「江戸の夏を歩く」。木漏れ日の落ちるせせらぎの小路に風鈴の回廊が設けられ、正門と深大寺門には風鈴門と変化朝顔が並ぶ。朝顔は昼前に萎む。",
+   map:"https://maps.google.com/?cid=9763061280357406539"},
+  {id:"shinobu", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["natsu"], name:"つりしのぶと江戸風鈴の展示", shade:"in",
+   status:"open", statusText:"8月30日まで", hours:"植物会館ホール ／ 火 9:30–17:00",
+   note:"同じ企画の屋内展示。つりしのぶはシダを束ねて軒に吊るし、涼をとる江戸の職人仕事。つりしのぶ作りのワークショップも開かれる。",
+   map:"https://maps.google.com/?cid=9763061280357406539"},
+  {id:"tenjin", area:"chofu", panel:"b", noFood:true, genres:["natsu"], name:"天神通り商店街", shade:"sun",
+   status:"open", statusText:"通年・無料", hours:"調布駅 北口すぐ",
+   note:"調布駅から布多天神社へ続く商店街。水木しげるが調布に住んでいた縁で、鬼太郎たちの像が通りに点在し、鬼太郎通りとも呼ばれる。鬼太郎茶屋とかき氷の店もこの通りに並ぶ。",
+   map:"https://www.google.com/maps/search/?api=1&query=調布+天神通り商店街"},
+
+  /* ===== 深大寺・参道 ===== */
+  {id:"tamanoya", area:"sando", panel:"a", genres:["soba","natsu"], name:"玉乃屋", shade:"shade",
+   status:"open", rating:"3.8 / 493件", hours:"火 10:00–15:30（月休）",
+   note:"十割そばと鴨。屋外席があり、地ビールの深大寺ビールを置いている。神代植物公園の正門前。",
+   map:"https://maps.google.com/?cid=5327721191104570701"},
+  {id:"yusui", area:"sando", panel:"a", genres:["soba"], name:"湧水", shade:"in",
+   status:"open", rating:"4.1 / 2,358件", hours:"火 10:30–18:00（木休）",
+   note:"参道でもっとも名の知れた店。開店直後から行列ができるが、席数があり回転は速い。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+湧水"},
+  {id:"matsuba", area:"sando", panel:"a", genres:["soba"], name:"松葉茶屋", shade:"shade",
+   status:"open", rating:"4.2 / 578件", hours:"火 9:30–16:30（月休）",
+   note:"神代植物公園の深大寺門側、坂を上がった先。屋外席があり、犬を連れて入れる。参道の店より空いていることが多い。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺+松葉茶屋"},
+  {id:"daishi", area:"sando", panel:"a", genres:["soba"], name:"大師茶屋", shade:"in",
+   status:"open", rating:"4.2 / 767件", hours:"火 10:30–15:00（水休）",
+   note:"盛りが多い。十割は数量限定で、昼前に売り切れることがある。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺+大師茶屋"},
+  {id:"ikkyuan", area:"sando", panel:"a", genres:["soba","dango"], name:"一休庵", shade:"in",
+   status:"open", rating:"4.0 / 606件", hours:"火 11:00–15:00（月休）",
+   note:"水車のある古い建物。そばは十割・九割・八割から選べ、冷たいつけ汁で出す。そば粉で作った団子はみたらしと胡麻の二種のたれで、胡麻を推す声が多い。そば茶が付く。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺+一休庵"},
+  {id:"tamon", area:"sando", panel:"a", genres:["soba"], name:"多聞", shade:"shade",
+   status:"open", rating:"3.9 / 1,137件", hours:"火 10:00–15:30（月休）",
+   note:"参道から少し離れた大きめの店。屋外席がいくつかあり、店内で土産物も扱う。盛りは多め。英語が通じる。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+多聞"},
+  {id:"kiyoshi", area:"sando", panel:"a", genres:["soba"], name:"深大寺そば きよし", shade:"in",
+   status:"closed", rating:"4.0 / 482件", hours:"水〜日 11:00–18:30（月・火休）",
+   note:"小体な店。海老天そばと鴨そばに評価が集まる。年末年始や行事の日は長く並ぶ。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+きよし"},
+  {id:"yaoki", area:"sando", panel:"a", genres:["dango","soba"], name:"八起", shade:"water",
+   status:"check", rating:"3.6 / 278件", hours:"木〜月 10:00–15:00（火・水休）／ 042-482-0141",
+   note:"山門の横。池に面した席がある。そばのほか、そば粉の団子と餅を出す。冷たいそばと温かいそばを選べる。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺+八起"},
+  {id:"ameya", area:"sando", panel:"a", genres:["dango"], name:"あめや", shade:"sun",
+   status:"open", rating:"4.0 / 103件", hours:"火 10:00–15:00（月・木休）",
+   note:"山門の並び。そばパンは野沢菜やキーマカレーを包んだ惣菜系で、甘めのもっちりした生地。焼き草もち、そばまんじゅうも並ぶ。席はなく、店先で立って食べる。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺+あめや"},
+  {id:"baigetsu", area:"sando", panel:"a", genres:["dango"], name:"梅月", shade:"in",
+   status:"open", rating:"4.1 / 41件", hours:"毎日 10:00–17:00",
+   note:"バス停のそばの老舗。こしあんを薄い皮で包んだそばまんじゅうが看板。大判焼きは150円ほど、甘酒あめも扱う。現金のみ。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺+梅月"},
+  {id:"gyokusendo", area:"sando", panel:"a", genres:["dango"], name:"玉泉堂", shade:"in",
+   status:"check", rating:"4.8 / 12件", hours:"不定期（旗が出ていれば営業）",
+   note:"湧水の向かい。挽きたてのそば粉を使った焼き菓子を手作りで少量ずつ出す。ガレットやマドレーヌなど洋菓子寄り。",
+   map:"https://www.google.com/maps/search/?api=1&query=深大寺+玉泉堂"},
+  {id:"jindaiji", area:"sando", panel:"a", noFood:true, genres:["spot"], name:"深大寺", shade:"in",
+   status:"open", rating:"4.3 / 8,540件", hours:"毎日 6:00–17:00",
+   note:"国宝の釈迦如来倚像は釈迦堂で拝観300円。元三大師堂では日に数回の護摩祈願がある。御朱印は当面すべて書き置きの紙朱印で、朱印帳への直書きはしていない。",
+   map:"https://maps.google.com/?cid=8224161598012187145"},
+
+  /* ===== 神代植物公園 ===== */
+  {id:"jindaipark", area:"park", panel:"a", noFood:true, genres:["spot"], name:"神代植物公園", shade:"shade",
+   status:"open", rating:"4.3 / 6,486件", hours:"火 9:30–17:00（最終入園16:00・月休）／ 500円",
+   note:"武蔵野の雑木林が残る都立の植物公園。ばら園は約400種5,200株。大温室は熱帯植物を集めた屋内施設で、夏は室温が上がる。",
+   map:"https://maps.google.com/?cid=9763061280357406539"},
+  {id:"suisei", area:"park", panel:"a", noFood:true, genres:["spot","natsu"], name:"水生植物園", shade:"water",
+   status:"open", rating:"4.1 / 176件", hours:"火 9:30–16:30（月休）／ 無料",
+   note:"深大寺から東へ徒歩5分の湿地に木道が渡されている。湧水と深大寺城跡があり、神代植物公園の一部だが入園は無料。",
+   map:"https://maps.google.com/?cid=5473221735308242460"},
+  {id:"greensalon", area:"park", panel:"a", genres:["spot"], name:"グリーンサロン", shade:"in",
+   status:"open", rating:"3.8 / 33件", hours:"火 9:30–17:00（月休）",
+   note:"神代植物公園の園内カフェ。深大寺養蜂園のはちみつを使ったカレーが名物。屋内席とテラス席があり、先に注文して席で待つ方式。",
+   map:"https://maps.google.com/?cid=15233203860007683140"},
+
+  /* ===== 調布駅前・天神通り ===== */
+  {id:"anand", area:"chofu", panel:"b", genres:["kori"], name:"甘味an&", shade:"in",
+   status:"open", rating:"3.9 / 36件", hours:"火 11:00–21:00",
+   note:"季節の素材を使ったかき氷。氷の中にも具が仕込まれる。抹茶あずきで1,300円ほど。あんみつなどの甘味もある。あずきや安藤の姉妹店で、2022年開店。",
+   map:"https://maps.google.com/?cid=12442747606617253566"},
+  {id:"azukiya", area:"chofu", panel:"b", genres:["kori","dango"], name:"あずきや安藤", shade:"sun",
+   status:"open", rating:"4.0 / 207件", hours:"毎日 10:30–18:30",
+   note:"北海道産の小豆を銅釜で炊いた粒あんの今川焼と、かき氷。生地に黒ごまが入る。今川焼は200円ほど。テイクアウト専門で席はない。",
+   map:"https://maps.google.com/?cid=16583204490180936106"},
+  {id:"kitaro", area:"chofu", panel:"b", genres:["kori"], name:"鬼太郎茶屋", shade:"in",
+   status:"check", rating:"4.1 / 1,504件", hours:"10:00–18:00 ／ 042-482-4059",
+   note:"妖怪をモチーフにした甘味とグッズの店。グッズは350種類以上。深大寺の参道にあった店舗は2024年8月に閉店し、同年11月に天神通りへ移転した。7月からかき氷を出す。",
+   map:"https://maps.google.com/?cid=6072209734608962775"},
+  {id:"kumokuma", area:"chofu", panel:"b", genres:["kori"], name:"パクパクくもくま堂", shade:"in",
+   status:"closed", rating:"4.1 / 176件", hours:"水〜日（月・火休）",
+   note:"クマの形のかき氷で知られる専門店。メニューは日替わりで6種ほど。LINEか電話で予約できる。調布駅から徒歩10分弱。",
+   map:"https://maps.google.com/?cid=1990523650059546140"},
+  {id:"oimono", area:"chofu", panel:"b", genres:["dango"], name:"おいものおうち 調布店", shade:"in",
+   status:"closed", rating:"4.7 / 131件", hours:"木〜月 11:30–19:00（火・水休）",
+   note:"焼き芋の専門店。さつまいものスムージーやスープ、大福もある。イートインの席がある。",
+   map:"https://www.google.com/maps/search/?api=1&query=おいものおうち+調布店"}
+];
+
+const AREAS = [
+  {id:"sando", name:"深大寺・参道", sub:"バス停「深大寺」下車"},
+  {id:"park",  name:"神代植物公園", sub:"バス停「神代植物公園前」下車"},
+  {id:"chofu", name:"調布駅前・天神通り", sub:"京王線 調布駅 北口"}
+];
+const GENRES = [
+  {id:"all",   label:"すべて"},
+  {id:"natsu", label:"夏"},
+  {id:"soba",  label:"蕎麦"},
+  {id:"dango", label:"茶菓"},
+  {id:"kori",  label:"かき氷"},
+  {id:"spot",  label:"見所"}
+];
+const SHADE_LABEL = {in:"屋内", shade:"木陰・外席", water:"水辺", sun:"日向あり"};
+const STATUS = {
+  open:  {cls:"st-open",   label:"8/11 営業"},
+  closed:{cls:"st-closed", label:"8/11 休み"},
+  check: {cls:"st-check",  label:"8/11 要確認"}
+};
+/* noFood: 飲食店ではないもの。食べログのボタンを出さない */
+const BY_ID = Object.fromEntries(SHOPS.map(s => [s.id, s]));
+
+/* 営業時間の中の電話番号をタップできるようにする */
+function linkTel(text){
+  return text.replace(/0\d{1,3}-\d{2,4}-\d{4}/g,
+    m => `<a href="tel:${m.replace(/-/g, "")}">${m}</a>`);
+}
+
+/* 通し番号：一覧の並び順で、地図の面ごとに振る */
+(function(){
+  const n = {a:0, b:0};
+  AREAS.forEach(a => SHOPS.filter(s => s.area === a.id && !s.pinWith)
+    .forEach(s => { s.num = ++n[s.panel]; }));
+  SHOPS.filter(s => s.pinWith).forEach(s => { s.num = BY_ID[s.pinWith].num; });
+})();
+
+const listEl  = document.getElementById("list");
+const emptyEl = document.getElementById("empty");
+const rowEl   = document.getElementById("tabs-row");
+let current = "all";
+
+/* ---- タブ ---- */
+rowEl.innerHTML = GENRES.map(g => {
+  const n = g.id === "all" ? SHOPS.length : SHOPS.filter(s => s.genres.includes(g.id)).length;
+  return `<button data-genre="${g.id}" aria-pressed="${g.id === "all"}">${g.label}<span class="tab-n">${n}</span></button>`;
+}).join("");
+
+/* ---- 地図を描く ---- */
+function drawPanel(key, holderId){
+  const d = MAPDATA[key];
+  const dots = d.pts.map(p => {
+    const s = BY_ID[p.id];
+    return `<g class="dot s-${s.shade}" data-id="${s.id}" role="button" tabindex="0" aria-label="${s.name}">
+      <circle cx="${p.x}" cy="${p.y}" r="11"></circle>
+      <text x="${p.x}" y="${p.y + 3.6}" text-anchor="middle">${s.num}</text>
+    </g>`;
+  }).join("");
+  const y = d.h - 16, x0 = 22;
+  const scale = `<g class="scale">
+      <line x1="${x0}" y1="${y}" x2="${x0 + d.bar}" y2="${y}"></line>
+      <line x1="${x0}" y1="${y - 4}" x2="${x0}" y2="${y + 4}"></line>
+      <line x1="${x0 + d.bar}" y1="${y - 4}" x2="${x0 + d.bar}" y2="${y + 4}"></line>
+      <text x="${x0 + d.bar + 7}" y="${y + 3.5}">100m</text>
+    </g>`;
+  document.getElementById(holderId).innerHTML =
+    `<svg viewBox="0 0 ${d.w} ${d.h}" preserveAspectRatio="xMidYMid meet">${scale}${dots}</svg>`;
+}
+drawPanel("a", "svg-a");
+drawPanel("b", "svg-b");
+
+/* ---- 表示切り替え ---- */
+function visible(){ return SHOPS.filter(s => current === "all" || s.genres.includes(current)); }
+
+function syncDots(){
+  const on = new Set(visible().map(s => s.pinWith || s.id));
+  document.querySelectorAll(".dot").forEach(g => g.classList.toggle("is-off", !on.has(g.dataset.id)));
+}
+function setActive(id){
+  document.querySelectorAll(".dot").forEach(g => g.classList.toggle("is-active", g.dataset.id === id));
+  document.querySelectorAll(".card").forEach(c => c.classList.toggle("is-active", c.dataset.id === id));
+}
+
+function cardHtml(s){
+  const st = STATUS[s.status];
+  const label = s.statusText || st.label;
+  const tabelog = s.noFood ? "" :
+    `<a href="https://tabelog.com/rstLst/?sw=${encodeURIComponent(s.name)}" target="_blank" rel="noopener">食べログ</a>`;
+  const rating = s.rating ? `<span class="card-rating">${s.rating}</span>` : "";
+  return `
+    <article class="card shade-${s.shade}" data-id="${s.id}" id="c-${s.id}">
+      <div class="card-top">
+        <div class="card-title">
+          <button type="button" class="card-num n-${s.pinWith ? BY_ID[s.pinWith].shade : s.shade}" data-focus="${s.pinWith || s.id}" title="このページの地図で位置を見る" aria-label="地図の${s.num}番の位置を見る">${s.num}</button>
+          <h3 class="card-name">${s.name}</h3>
+        </div>
+        ${rating}
+      </div>
+      <span class="status ${st.cls}">${label} <small>／ ${SHADE_LABEL[s.shade]}</small></span>
+      <p class="card-note">${s.note}</p>
+      <p class="hours">${linkTel(s.hours)}${s.pinWith ? "　／　地図では " + s.num + " " + BY_ID[s.pinWith].name + " と同じ地点" : ""}</p>
+      <div class="links">
+        <a href="${s.map}" target="_blank" rel="noopener">Googleマップ</a>
+        ${tabelog}
+      </div>
+    </article>`;
+}
+
+function render(){
+  let total = 0;
+  listEl.innerHTML = AREAS.map(area => {
+    const items = visible().filter(s => s.area === area.id);
+    if(!items.length) return "";
+    total += items.length;
+    return `<section class="area">
+        <div class="area-head"><h2>${area.name}</h2><span class="area-sub">${area.sub}</span></div>
+        <div class="area-rule"></div>
+        ${items.map(cardHtml).join("")}
+      </section>`;
+  }).join("");
+  emptyEl.hidden = total > 0;
+}
+
+rowEl.addEventListener("click", e => {
+  const btn = e.target.closest("button");
+  if(!btn) return;
+  current = btn.dataset.genre;
+  rowEl.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
+  render(); syncDots(); setActive(null);
+});
+
+/* 地図のドット → カードへ */
+document.querySelectorAll(".mapfig").forEach(fig => {
+  const jump = g => {
+    const id = g.dataset.id;
+    setActive(id);
+    let card = document.getElementById("c-" + id);
+    if(!card){
+      const child = visible().find(s => s.pinWith === id);
+      if(child) card = document.getElementById("c-" + child.id);
+    }
+    if(card) card.scrollIntoView({block:"center"});
+  };
+  fig.addEventListener("click", e => { const g = e.target.closest(".dot"); if(g) jump(g); });
+  fig.addEventListener("keydown", e => {
+    if(e.key !== "Enter" && e.key !== " ") return;
+    const g = e.target.closest(".dot"); if(g){ e.preventDefault(); jump(g); }
+  });
+});
+
+/* カード → 地図へ */
+listEl.addEventListener("click", e => {
+  const btn = e.target.closest("button[data-focus]");
+  if(!btn) return;
+  const s = BY_ID[btn.dataset.focus];
+  setActive(s.id);
+  document.querySelector(s.panel === "a" ? ".map-a" : ".map-b")
+    .scrollIntoView({block:"center"});
+});
+
+render(); syncDots();
+</script>
+</body>
+</html>

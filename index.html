@@ -53,29 +53,8 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(30px,8.4vw,50px);line-height:1.2;letter-spacing:.03em;white-space:nowrap}
 .hero h1 em{font-style:normal;color:var(--ai);letter-spacing:.12em;margin-left:.18em}
 
-/* ---------- 地図 ---------- */
-.maps{margin-top:24px;display:flex;flex-direction:column;gap:14px}
-.mapfig{border:1px solid var(--line);border-radius:5px;background:var(--card);padding:12px 10px 8px}
-.mapfig figcaption{
-  font-family:var(--disp);font-size:12.5px;letter-spacing:.1em;color:var(--ink-2);
-  padding:0 6px 8px;display:flex;justify-content:space-between;align-items:baseline;
-}
-.mapfig figcaption span{font-family:var(--body);font-size:10.5px;color:var(--ink-3);letter-spacing:.04em}
-.mapfig svg{display:block;width:100%;height:auto}
-.map-a svg{max-height:430px;margin:0 auto}
-.dot{cursor:pointer}
-.dot circle{stroke:var(--card);stroke-width:2;transition:r .18s}
-.dot text{font-family:var(--body);font-size:10px;font-weight:700;fill:var(--on-accent);pointer-events:none}
-.dot.s-in circle{fill:var(--ai)}
-.dot.s-shade circle{fill:var(--koke)}
-.dot.s-water circle{fill:var(--yusui)}
-.dot.s-sun circle{fill:var(--shu)}
-.dot.is-off{display:none}
-.dot.is-active circle{r:14;stroke:var(--yusui);stroke-width:3}
-.scale line{stroke:var(--ink-3);stroke-width:1.2}
-.scale text{font-family:var(--body);font-size:9.5px;fill:var(--ink-3);letter-spacing:.04em}
 
-.legend{display:flex;flex-wrap:wrap;gap:5px 16px;padding:14px 0 0}
+.legend{display:flex;flex-wrap:wrap;gap:5px 16px;padding:24px 0 0}
 .legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
 .chip-band{width:9px;height:9px;border-radius:50%;flex:none}
 .b-in{background:var(--ai)} .b-shade{background:var(--koke)}
@@ -116,21 +95,8 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .card.shade-shade::before{background:repeating-linear-gradient(135deg,var(--koke) 0 4px,var(--koke-2) 4px 8px)}
 .card.shade-water::before{background:var(--yusui)}
 .card.shade-sun::before{background:var(--shu)}
-.card.is-active{border-color:var(--yusui);box-shadow:0 0 0 1px var(--yusui)}
 
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.card-title{display:flex;align-items:baseline;gap:9px;min-width:0}
-.card-num{
-  font-family:var(--body);font-size:10.5px;font-weight:700;flex:none;
-  width:21px;height:21px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;
-  color:var(--on-accent);font-variant-numeric:tabular-nums;transform:translateY(2px);
-  border:none;padding:0;cursor:pointer;
-  transition:box-shadow .15s,transform .15s;
-}
-.card-num:hover{box-shadow:0 0 0 3px var(--yusui);transform:translateY(2px) scale(1.08)}
-.card-num:focus-visible{outline:2px solid var(--yusui);outline-offset:2px}
-.n-in{background:var(--ai)} .n-shade{background:var(--koke)}
-.n-water{background:var(--yusui)} .n-sun{background:var(--shu)}
 .card-name{font-family:var(--disp);font-size:18px;font-weight:700;letter-spacing:.03em;line-height:1.35}
 .card-rating{font-size:11.5px;color:var(--ink-3);white-space:nowrap;padding-top:5px;font-variant-numeric:tabular-nums}
 .card-note{font-size:13.5px;color:var(--ink-2);line-height:1.65}
@@ -171,17 +137,6 @@ footer b{color:var(--ink-2)}
     <h1>📍深大寺<em>MAP</em></h1>
   </header>
 
-  <div class="maps">
-    <figure class="mapfig map-a">
-      <figcaption>深大寺・神代植物公園<span>上が北</span></figcaption>
-      <div id="svg-a"></div>
-    </figure>
-    <figure class="mapfig map-b">
-      <figcaption>調布駅前・天神通り<span>上が北</span></figcaption>
-      <div id="svg-b"></div>
-    </figure>
-  </div>
-
   <div class="legend">
     <span class="legend-item"><i class="chip-band b-in"></i>屋内</span>
     <span class="legend-item"><i class="chip-band b-shade"></i>木陰・外席</span>
@@ -198,14 +153,12 @@ footer b{color:var(--ink-2)}
 
   <footer>
     <b>営業状況は8月11日（火）時点。</b>お盆は臨時休業が出やすいので、赤と黄色の札は電話で確認を。<br>
-    地図の位置は目安。近いものは重ならないようずらしてある。<br>
     評価と営業時間はGoogleマップより。
   </footer>
 
 </div>
 
 <script>
-const MAPDATA = {"a": {"w": 600, "h": 860, "bar": 110.3, "pts": [{"id": "jinja", "x": 271.3, "y": 575.9}, {"id": "tamanoya", "x": 394.8, "y": 541.1}, {"id": "yusui", "x": 92.4, "y": 599.7}, {"id": "matsuba", "x": 365.9, "y": 539.5}, {"id": "daishi", "x": 160.1, "y": 587.9}, {"id": "ikkyuan", "x": 347.1, "y": 626.6}, {"id": "tamon", "x": 550.9, "y": 763.7}, {"id": "kiyoshi", "x": 263.4, "y": 667.3}, {"id": "yaoki", "x": 430.9, "y": 693.2}, {"id": "ameya", "x": 378.8, "y": 647.1}, {"id": "baigetsu", "x": 309.9, "y": 645.0}, {"id": "gyokusendo", "x": 105.6, "y": 633.4}, {"id": "jindaiji", "x": 445.6, "y": 616.7}, {"id": "jindaipark", "x": 241.6, "y": 156.4}, {"id": "suisei", "x": 554.0, "y": 813.9}, {"id": "greensalon", "x": 46.0, "y": 46.0}]}, "b": {"w": 600, "h": 258, "bar": 168.4, "pts": [{"id": "tenjin", "x": 127.0, "y": 124.8}, {"id": "anand", "x": 87.2, "y": 203.9}, {"id": "azukiya", "x": 59.5, "y": 212.5}, {"id": "kitaro", "x": 46.0, "y": 170.0}, {"id": "kumokuma", "x": 554.0, "y": 46.0}, {"id": "oimono", "x": 468.4, "y": 127.5}]}};
 
 const SHOPS = [
   /* ===== 夏のもの ===== */
@@ -345,13 +298,6 @@ function linkTel(text){
     m => `<a href="tel:${m.replace(/-/g, "")}">${m}</a>`);
 }
 
-/* 通し番号：一覧の並び順で、地図の面ごとに振る */
-(function(){
-  const n = {a:0, b:0};
-  AREAS.forEach(a => SHOPS.filter(s => s.area === a.id && !s.pinWith)
-    .forEach(s => { s.num = ++n[s.panel]; }));
-  SHOPS.filter(s => s.pinWith).forEach(s => { s.num = BY_ID[s.pinWith].num; });
-})();
 
 const listEl  = document.getElementById("list");
 const emptyEl = document.getElementById("empty");
@@ -364,40 +310,10 @@ rowEl.innerHTML = GENRES.map(g => {
   return `<button data-genre="${g.id}" aria-pressed="${g.id === "all"}">${g.label}<span class="tab-n">${n}</span></button>`;
 }).join("");
 
-/* ---- 地図を描く ---- */
-function drawPanel(key, holderId){
-  const d = MAPDATA[key];
-  const dots = d.pts.map(p => {
-    const s = BY_ID[p.id];
-    return `<g class="dot s-${s.shade}" data-id="${s.id}" role="button" tabindex="0" aria-label="${s.name}">
-      <circle cx="${p.x}" cy="${p.y}" r="11"></circle>
-      <text x="${p.x}" y="${p.y + 3.6}" text-anchor="middle">${s.num}</text>
-    </g>`;
-  }).join("");
-  const y = d.h - 16, x0 = 22;
-  const scale = `<g class="scale">
-      <line x1="${x0}" y1="${y}" x2="${x0 + d.bar}" y2="${y}"></line>
-      <line x1="${x0}" y1="${y - 4}" x2="${x0}" y2="${y + 4}"></line>
-      <line x1="${x0 + d.bar}" y1="${y - 4}" x2="${x0 + d.bar}" y2="${y + 4}"></line>
-      <text x="${x0 + d.bar + 7}" y="${y + 3.5}">100m</text>
-    </g>`;
-  document.getElementById(holderId).innerHTML =
-    `<svg viewBox="0 0 ${d.w} ${d.h}" preserveAspectRatio="xMidYMid meet">${scale}${dots}</svg>`;
-}
-drawPanel("a", "svg-a");
-drawPanel("b", "svg-b");
 
 /* ---- 表示切り替え ---- */
 function visible(){ return SHOPS.filter(s => current === "all" || s.genres.includes(current)); }
 
-function syncDots(){
-  const on = new Set(visible().map(s => s.pinWith || s.id));
-  document.querySelectorAll(".dot").forEach(g => g.classList.toggle("is-off", !on.has(g.dataset.id)));
-}
-function setActive(id){
-  document.querySelectorAll(".dot").forEach(g => g.classList.toggle("is-active", g.dataset.id === id));
-  document.querySelectorAll(".card").forEach(c => c.classList.toggle("is-active", c.dataset.id === id));
-}
 
 function cardHtml(s){
   const st = STATUS[s.status];
@@ -408,15 +324,12 @@ function cardHtml(s){
   return `
     <article class="card shade-${s.shade}" data-id="${s.id}" id="c-${s.id}">
       <div class="card-top">
-        <div class="card-title">
-          <button type="button" class="card-num n-${s.pinWith ? BY_ID[s.pinWith].shade : s.shade}" data-focus="${s.pinWith || s.id}" title="このページの地図で位置を見る" aria-label="地図の${s.num}番の位置を見る">${s.num}</button>
-          <h3 class="card-name">${s.name}</h3>
-        </div>
+        <h3 class="card-name">${s.name}</h3>
         ${rating}
       </div>
       <span class="status ${st.cls}">${label} <small>／ ${SHADE_LABEL[s.shade]}</small></span>
       <p class="card-note">${s.note}</p>
-      <p class="hours">${linkTel(s.hours)}${s.pinWith ? "　／　地図では " + s.num + " " + BY_ID[s.pinWith].name + " と同じ地点" : ""}</p>
+      <p class="hours">${linkTel(s.hours)}${s.pinWith ? "　／　" + BY_ID[s.pinWith].name + " と同じ場所" : ""}</p>
       <div class="links">
         <a href="${s.map}" target="_blank" rel="noopener">Googleマップ</a>
         ${tabelog}
@@ -444,39 +357,13 @@ rowEl.addEventListener("click", e => {
   if(!btn) return;
   current = btn.dataset.genre;
   rowEl.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
-  render(); syncDots(); setActive(null);
+  render();
 });
 
-/* 地図のドット → カードへ */
-document.querySelectorAll(".mapfig").forEach(fig => {
-  const jump = g => {
-    const id = g.dataset.id;
-    setActive(id);
-    let card = document.getElementById("c-" + id);
-    if(!card){
-      const child = visible().find(s => s.pinWith === id);
-      if(child) card = document.getElementById("c-" + child.id);
-    }
-    if(card) card.scrollIntoView({block:"center"});
-  };
-  fig.addEventListener("click", e => { const g = e.target.closest(".dot"); if(g) jump(g); });
-  fig.addEventListener("keydown", e => {
-    if(e.key !== "Enter" && e.key !== " ") return;
-    const g = e.target.closest(".dot"); if(g){ e.preventDefault(); jump(g); }
-  });
-});
 
-/* カード → 地図へ */
-listEl.addEventListener("click", e => {
-  const btn = e.target.closest("button[data-focus]");
-  if(!btn) return;
-  const s = BY_ID[btn.dataset.focus];
-  setActive(s.id);
-  document.querySelector(s.panel === "a" ? ".map-a" : ".map-b")
-    .scrollIntoView({block:"center"});
-});
 
-render(); syncDots();
+render();
+
 </script>
 </body>
 </html>

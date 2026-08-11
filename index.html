@@ -142,6 +142,7 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
   border-radius:4px;padding:11px 13px;margin-bottom:11px;
   font-size:12.5px;line-height:1.65;
 }
+.bus-alert.solo{margin-top:26px}
 .bus-card{
   background:var(--card);border:1px solid var(--line);
   border-radius:4px;padding:14px 16px;margin-bottom:10px;
@@ -218,6 +219,11 @@ footer b{color:var(--ink-2)}
     </div>
   </section>
 
+  <div class="bus-alert solo">
+    <span>💴</span>
+    <span><b>参道は現金がいる。</b>そば・甘味の10軒中7軒が現金のみ。カードが使えるのは<b>松葉茶屋</b>と<b>きよし</b>の2軒だけで、<b>湧水</b>はPayPayのみ可。近くにATMがないので、三鷹か調布の駅で下ろしておくこと。</span>
+  </div>
+
   <footer>
     <b>営業状況は8月14日（金）時点。曜日の定休はどこも当たらない。</b>お盆だが観光地なので基本は営業しているはず。ただし個人店は臨時休業の可能性もあるので、外したくない店は電話で確認を。<br>
     評価と営業時間はGoogleマップより。
@@ -257,44 +263,44 @@ const SHOPS = [
 
   /* ===== 深大寺・参道 ===== */
   {id:"tamanoya", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13055725/", panel:"a", genres:["soba","natsu"], name:"玉乃屋", shade:"shade",
-   status:"open", rating:"3.8 / 493件", hours:"金 10:00–15:30（月休）",
+   status:"open", rating:"3.8 / 493件", hours:"金 10:00–15:30（月休）／ 現金のみ",
    note:"十割そばと鴨。屋外席があり、地ビールの深大寺ビールを置いている。神代植物公園の正門前。",
    map:"https://maps.google.com/?cid=5327721191104570701"},
   {id:"yusui", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13010191/", panel:"a", genres:["soba"], name:"湧水", shade:"in",
-   status:"open", rating:"4.1 / 2,358件", hours:"金 10:30–18:00（木休）",
+   status:"open", rating:"4.1 / 2,358件", hours:"金 10:30–18:00（木休）／ 現金・PayPay",
    note:"参道でもっとも名の知れた店。開店直後から行列ができるが、席数があり回転は速い。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+湧水"},
   {id:"matsuba", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13033267/", panel:"a", genres:["soba"], name:"松葉茶屋", shade:"shade",
-   status:"open", rating:"4.2 / 578件", hours:"金 9:30–16:30（月休）",
+   status:"open", rating:"4.2 / 578件", hours:"金 9:30–16:30（月休）／ カード可",
    note:"神代植物公園の深大寺門側、坂を上がった先。屋外席があり、犬を連れて入れる。参道の店より空いていることが多い。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+松葉茶屋"},
   {id:"daishi", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13032191/", panel:"a", genres:["soba"], name:"大師茶屋", shade:"in",
-   status:"open", rating:"4.2 / 767件", hours:"金 10:30–15:00（水休）",
+   status:"open", rating:"4.2 / 767件", hours:"金 10:30–15:00（水休）／ 現金のみ",
    note:"盛りが多い。十割は数量限定で、昼前に売り切れることがある。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+大師茶屋"},
   {id:"ikkyuan", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13016209/", panel:"a", genres:["soba","dango"], name:"一休庵", shade:"in",
-   status:"open", rating:"4.0 / 606件", hours:"金 11:00–15:00（月休）",
+   status:"open", rating:"4.0 / 606件", hours:"金 11:00–15:00（月休）／ 現金のみ",
    note:"水車のある古い建物。そばは十割・九割・八割から選べ、冷たいつけ汁で出す。そば粉で作った団子はみたらしと胡麻の二種のたれで、胡麻を推す声が多い。そば茶が付く。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+一休庵"},
   {id:"tamon", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13010173/", panel:"a", genres:["soba"], name:"多聞", shade:"shade",
-   status:"open", rating:"3.9 / 1,137件", hours:"金 10:00–15:30（月休）",
+   status:"open", rating:"3.9 / 1,137件", hours:"金 10:00–15:30（月休）／ 現金のみ",
    note:"参道から少し離れた大きめの店。屋外席がいくつかあり、店内で土産物も扱う。盛りは多め。英語が通じる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+多聞"},
   {id:"kiyoshi", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13068195/", panel:"a", genres:["soba"], name:"深大寺そば きよし", shade:"in",
-   status:"open", rating:"4.0 / 482件", hours:"金 11:00–18:30（月・火休）",
+   status:"open", rating:"4.0 / 482件", hours:"金 11:00–18:30（月・火休）／ カード可",
    note:"小体な店。海老天そばと鴨そばに評価が集まる。年末年始や行事の日は長く並ぶ。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+きよし"},
   {id:"yaoki", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13057896/", panel:"a", genres:["dango","soba"], name:"八起", shade:"water",
-   status:"open", rating:"3.6 / 278件", hours:"金 10:00–15:00（火・水休）／ 042-482-0141",
+   status:"open", rating:"3.6 / 278件", hours:"金 10:00–15:00（火・水休）／ 現金のみ ／ 042-482-0141",
    note:"山門の横。池に面した席がある。そばのほか、そば粉の団子と餅を出す。冷たいそばと温かいそばを選べる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+八起"},
   {id:"ameya", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13090474/", panel:"a", genres:["dango"], name:"あめや", shade:"sun",
-   status:"open", rating:"4.0 / 103件", hours:"金 10:00–15:00（月・木休）",
+   status:"open", rating:"4.0 / 103件", hours:"金 10:00–15:00（月・木休）／ 現金のみ",
    note:"山門の並び。そばパンは野沢菜やキーマカレーを包んだ惣菜系で、甘めのもっちりした生地。焼き草もち、そばまんじゅうも並ぶ。席はなく、店先で立って食べる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+あめや"},
   {id:"baigetsu", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13193648/", panel:"a", genres:["dango"], name:"梅月", shade:"in",
-   status:"open", rating:"4.1 / 41件", hours:"毎日 10:00–17:00",
-   note:"バス停のそばの老舗。こしあんを薄い皮で包んだそばまんじゅうが看板。大判焼きは150円ほど、甘酒あめも扱う。現金のみ。",
+   status:"open", rating:"4.1 / 41件", hours:"毎日 10:00–17:00 ／ 現金のみ",
+   note:"バス停のそばの老舗。こしあんを薄い皮で包んだそばまんじゅうが看板。大判焼きは150円ほど、甘酒あめも扱う。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+梅月"},
   {id:"gyokusendo", area:"sando", panel:"a", genres:["dango"], name:"玉泉堂", shade:"in",
    status:"check", rating:"4.8 / 12件", hours:"不定期（旗が出ていれば営業）",

@@ -143,6 +143,7 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
   font-size:12.5px;line-height:1.65;
 }
 .bus-alert.solo{margin-top:26px}
+.bus[hidden],.bus-alert[hidden]{display:none}
 .bus-card{
   background:var(--card);border:1px solid var(--line);
   border-radius:4px;padding:14px 16px;margin-bottom:10px;
@@ -428,6 +429,10 @@ function render(){
       </section>`;
   }).join("");
   emptyEl.hidden = total > 0;
+
+  /* バス・現金メモは「すべて」のときだけ出す */
+  const isAll = current === "all";
+  document.querySelectorAll(".bus, .bus-alert.solo").forEach(el => { el.hidden = !isAll; });
 }
 
 rowEl.addEventListener("click", e => {

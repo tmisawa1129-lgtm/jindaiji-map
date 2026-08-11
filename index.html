@@ -142,7 +142,7 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
   border-radius:4px;padding:11px 13px;margin-bottom:11px;
   font-size:12.5px;line-height:1.65;
 }
-.bus-card{
+.bus-card,.plan-card{
   background:var(--card);border:1px solid var(--line);
   border-radius:4px;padding:14px 16px;margin-bottom:10px;
 }
@@ -155,6 +155,19 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .bus-line:first-of-type{border-top:none}
 .bus-when{flex:none;width:72px;font-size:11.5px;color:var(--ink-3);letter-spacing:.03em;padding-top:2px}
 .bus-t b{color:var(--ink)}
+
+/* ---------- 当日の流れ ---------- */
+.plan{margin-top:38px}
+.tl{list-style:none}
+.tl li{display:flex;gap:13px;padding:9px 0;border-top:1px dotted var(--line)}
+.tl li:first-child{border-top:none}
+.tl-time{
+  flex:none;width:44px;padding-top:1px;
+  font-family:var(--disp);font-size:14px;font-weight:700;color:var(--ai);
+  font-variant-numeric:tabular-nums;letter-spacing:.02em;
+}
+.tl-what{font-size:13.5px;color:var(--ink);line-height:1.55}
+.tl-sub{display:block;font-size:11.5px;color:var(--ink-3);line-height:1.6;margin-top:1px}
 .empty{padding:40px 0;text-align:center;color:var(--ink-3);font-size:13.5px}
 .empty[hidden]{display:none}
 footer{margin-top:44px;padding-top:18px;border-top:1px solid var(--line);font-size:11.5px;color:var(--ink-3);line-height:1.8}
@@ -215,6 +228,38 @@ footer b{color:var(--ink-2)}
       <div class="bus-route">帰り　深大寺 → 三鷹駅</div>
       <div class="bus-meta">小田急バス 鷹65 ／ 約27分</div>
       <div class="bus-line"><span class="bus-when">10〜18時台</span><span class="bus-t">毎時 06分・36分</span></div>
+    </div>
+  </section>
+
+  <section class="area plan">
+    <div class="area-head">
+      <h2>🗓 当日の流れ</h2>
+      <span class="area-sub">時刻は目安</span>
+    </div>
+    <div class="area-rule"></div>
+
+    <div class="plan-card">
+      <ol class="tl">
+        <li><span class="tl-time">10:10</span><span class="tl-what">三鷹駅南口 発<span class="tl-sub">鷹65。逃しても10:40がある</span></span></li>
+        <li><span class="tl-time">10:35</span><span class="tl-what">深大寺 着<span class="tl-sub">まず本堂へ。山門のほおずき、深沙堂は境内西端</span></span></li>
+        <li><span class="tl-time">11:15</span><span class="tl-what">そば<span class="tl-sub">昼のピーク前に。湧水は並ぶので早いほど楽</span></span></li>
+        <li><span class="tl-time">12:30</span><span class="tl-what">かき氷・甘味<span class="tl-sub">あめや・梅月。15時閉店の店が多い</span></span></li>
+        <li><span class="tl-time">13:30</span><span class="tl-what">神代植物公園<span class="tl-sub">500円。深大寺門から入れる。大温室は夏は室温が上がる</span></span></li>
+        <li><span class="tl-time">15:30</span><span class="tl-what">水生植物園 か グリーンサロン<span class="tl-sub">水生は無料・16:30まで。暑ければ屋内で休憩</span></span></li>
+        <li><span class="tl-time">16:45</span><span class="tl-what">参道へ戻る</span></li>
+        <li><span class="tl-time">17:32</span><span class="tl-what">深大寺 発 → 調布駅北口<span class="tl-sub">調34。次は17:47</span></span></li>
+        <li><span class="tl-time">18:00</span><span class="tl-what">調布 → 新宿<span class="tl-sub">京王線 特急で約17分</span></span></li>
+      </ol>
+    </div>
+
+    <div class="bus-alert">
+      <span>⏰</span>
+      <span><b>そばは13時までに。</b>参道の蕎麦屋は15:00〜15:30閉店の店が多く、午後に回すと選択肢が消える。</span>
+    </div>
+
+    <div class="bus-alert">
+      <span>💴</span>
+      <span><b>現金を用意。</b>参道は現金のみの店がある。近くにATMが少ないので、三鷹か調布の駅で下ろしておくと安心。バスはICカードが使える。</span>
     </div>
   </section>
 

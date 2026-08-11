@@ -54,26 +54,18 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .hero h1 em{font-style:normal;color:var(--ai);letter-spacing:.12em;margin-left:.18em}
 
 
-.utils{display:flex;gap:8px;margin-top:22px}
-.utils a{
-  flex:1;text-align:center;text-decoration:none;
-  font-family:var(--body);font-size:12.5px;font-weight:500;
-  padding:9px 6px;border-radius:3px;
-  border:1px solid var(--line);color:var(--ink-2);
-  transition:background .15s,color .15s,border-color .15s;
+.wx{
+  display:flex;align-items:center;flex-wrap:wrap;gap:5px 11px;
+  margin-top:22px;padding:11px 14px;border-radius:3px;
+  border:1px solid var(--line);background:var(--card);
+  font-size:12.5px;color:var(--ink-2);min-height:46px;
 }
-.utils a:hover{background:var(--ai);border-color:var(--ai);color:var(--on-accent)}
-.utils a:focus-visible{outline:2px solid var(--yusui);outline-offset:2px}
-.utils{display:flex;gap:8px;margin-top:22px}
-.utils a{
-  flex:1;text-align:center;text-decoration:none;
-  font-family:var(--body);font-size:12.5px;font-weight:500;
-  padding:9px 6px;border-radius:3px;
-  border:1px solid var(--line);color:var(--ink-2);
-  transition:background .15s,color .15s,border-color .15s;
-}
-.utils a:hover{background:var(--ai);border-color:var(--ai);color:var(--on-accent)}
-.utils a:focus-visible{outline:2px solid var(--yusui);outline-offset:2px}
+.wx-icon{font-size:20px;line-height:1}
+.wx-now{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);letter-spacing:.02em}
+.wx-sep{width:1px;height:15px;background:var(--line);flex:none}
+.wx-hi{color:var(--shu);font-weight:500}
+.wx-lo{color:var(--yusui);font-weight:500}
+.wx-note{color:var(--ink-3)}
 .legend{display:flex;flex-wrap:wrap;gap:5px 16px;padding:24px 0 0}
 .legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
 .chip-band{width:9px;height:9px;border-radius:50%;flex:none}
@@ -155,9 +147,8 @@ footer b{color:var(--ink-2)}
   <header class="hero">
     <div class="hero-eyebrow">調布市 深大寺・神代植物公園</div>
     <h1>📍深大寺<em>MAP</em></h1>
-    <div class="utils">
-      <a href="https://tenki.jp/forecast/3/16/4410/13208/3hours.html" target="_blank" rel="noopener">3時間ごとの天気</a>
-      <a href="https://tenki.jp/forecast/3/16/4410/13208/" target="_blank" rel="noopener">今日明日の天気</a>
+    <div class="wx" id="wx" aria-live="polite">
+      <span class="wx-note">天気を読み込み中…</span>
     </div>
   </header>
 
@@ -392,6 +383,53 @@ rowEl.addEventListener("click", e => {
 
 
 render();
+
+
+/* ── 天気（Open-Meteo・深大寺） ─────────────── */
+const wxEl = document.getElementById("wx");
+
+const WX_CODE = {
+  0:["☀️","快晴"], 1:["🌤️","晴れ"], 2:["⛅","一部くもり"], 3:["☁️","くもり"],
+  45:["🌫️","霧"], 48:["🌫️","霧氷"],
+  51:["🌦️","霧雨"], 53:["🌦️","霧雨"], 55:["🌦️","強い霧雨"],
+  56:["🌧️","着氷性の霧雨"], 57:["🌧️","着氷性の霧雨"],
+  61:["🌧️","小雨"], 63:["🌧️","雨"], 65:["🌧️","強い雨"],
+  66:["🌧️","着氷性の雨"], 67:["🌧️","着氷性の雨"],
+  71:["🌨️","小雪"], 73:["🌨️","雪"], 75:["🌨️","大雪"], 77:["❄️","細氷"],
+  80:["🌦️","にわか雨"], 81:["🌦️","にわか雨"], 82:["🌦️","激しいにわか雨"],
+  85:["🌨️","にわか雪"], 86:["🌨️","強いにわか雪"],
+  95:["⛈️","雷雨"], 96:["⛈️","雷雨・ひょう"], 99:["⛈️","激しい雷雨・ひょう"]
+};
+
+const WX_URL = "https://api.open-meteo.com/v1/forecast"
+  + "?latitude=35.6672&longitude=139.5486"
+  + "&current=temperature_2m,weather_code"
+  + "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max"
+  + "&timezone=Asia%2FTokyo&forecast_days=1";
+
+async function loadWeather(){
+  try{
+    const res = await fetch(WX_URL, {cache:"no-store"});
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    const d = await res.json();
+    const [icon, label] = WX_CODE[d.current.weather_code] || ["🌡️","—"];
+    const now = Math.round(d.current.temperature_2m);
+    const hi  = Math.round(d.daily.temperature_2m_max[0]);
+    const lo  = Math.round(d.daily.temperature_2m_min[0]);
+    const pop = d.daily.precipitation_probability_max[0];
+    wxEl.innerHTML =
+      `<span class="wx-icon">${icon}</span>` +
+      `<span class="wx-now">${now}℃</span>` +
+      `<span>${label}</span>` +
+      `<span class="wx-sep"></span>` +
+      `<span class="wx-hi">最高 ${hi}℃</span>` +
+      `<span class="wx-lo">最低 ${lo}℃</span>` +
+      (pop == null ? "" : `<span>☂️ ${pop}%</span>`);
+  }catch(err){
+    wxEl.innerHTML = `<span class="wx-note">天気を取得できませんでした</span>`;
+  }
+}
+loadWeather();
 
 </script>
 </body>

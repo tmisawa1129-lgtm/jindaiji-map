@@ -62,6 +62,7 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 }
 .wx-icon{font-size:20px;line-height:1}
 .wx-now{font-family:var(--disp);font-weight:700;font-size:19px;color:var(--ink);letter-spacing:.02em}
+.wx-when{font-family:var(--disp);font-weight:700;font-size:15px;color:var(--ink);letter-spacing:.04em}
 .wx-sep{width:1px;height:15px;background:var(--line);flex:none}
 .wx-hi{color:var(--shu);font-weight:500}
 .wx-lo{color:var(--yusui);font-weight:500}
@@ -464,25 +465,37 @@ const WX_CODE = {
   95:["⛈️","雷雨"], 96:["⛈️","雷雨・ひょう"], 99:["⛈️","激しい雷雨・ひょう"]
 };
 
-const WX_URL = "https://api.open-meteo.com/v1/forecast"
+/* 訪問日。この日までは「その日の予報」、当日以降は「今の天気」を出す */
+const TRIP_DATE = "2026-08-14";
+
+const WX_BASE = "https://api.open-meteo.com/v1/forecast"
   + "?latitude=35.6672&longitude=139.5486"
-  + "&current=temperature_2m,weather_code"
-  + "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max"
-  + "&timezone=Asia%2FTokyo&forecast_days=1";
+  + "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
+  + "&timezone=Asia%2FTokyo";
 
 async function loadWeather(){
   try{
-    const res = await fetch(WX_URL, {cache:"no-store"});
+    const today = new Date().toLocaleDateString("sv-SE", {timeZone:"Asia/Tokyo"});
+    const ahead = today < TRIP_DATE;
+    const url = ahead
+      ? `${WX_BASE}&start_date=${TRIP_DATE}&end_date=${TRIP_DATE}`
+      : `${WX_BASE}&current=temperature_2m,weather_code&forecast_days=1`;
+
+    const res = await fetch(url, {cache:"no-store"});
     if(!res.ok) throw new Error("HTTP " + res.status);
     const d = await res.json();
-    const [icon, label] = WX_CODE[d.current.weather_code] || ["🌡️","—"];
-    const now = Math.round(d.current.temperature_2m);
+
+    const code = ahead ? d.daily.weather_code[0] : d.current.weather_code;
+    const [icon, label] = WX_CODE[code] || ["🌡️","—"];
     const hi  = Math.round(d.daily.temperature_2m_max[0]);
     const lo  = Math.round(d.daily.temperature_2m_min[0]);
     const pop = d.daily.precipitation_probability_max[0];
+    const head = ahead
+      ? `<span class="wx-when">${+TRIP_DATE.slice(5,7)}/${+TRIP_DATE.slice(8,10)}の予報</span>`
+      : `<span class="wx-now">${Math.round(d.current.temperature_2m)}℃</span>`;
+
     wxEl.innerHTML =
-      `<span class="wx-icon">${icon}</span>` +
-      `<span class="wx-now">${now}℃</span>` +
+      `<span class="wx-icon">${icon}</span>` + head +
       `<span>${label}</span>` +
       `<span class="wx-sep"></span>` +
       `<span class="wx-hi">最高 ${hi}℃</span>` +

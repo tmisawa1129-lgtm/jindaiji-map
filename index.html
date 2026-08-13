@@ -4,42 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>📍深大寺MAP</title>
-<meta name="description" content="深大寺と神代植物公園まわりの蕎麦・茶菓・かき氷・見所を、ジャンル別に地図と一覧でまとめたもの。">
+<title>深大寺MAP｜秋</title>
+<meta name="description" content="深大寺と神代植物公園まわりの新そば・紅葉・秋の花と、蕎麦屋や茶菓の店を、ジャンル別に地図と一覧でまとめたもの。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="深大寺MAP">
-<meta property="og:title" content="📍深大寺MAP">
-<meta property="og:description" content="深大寺と神代植物公園まわりの蕎麦・茶菓・かき氷・見所を、ジャンル別に地図と一覧でまとめたもの。">
+<meta property="og:title" content="深大寺MAP｜秋">
+<meta property="og:description" content="深大寺と神代植物公園まわりの新そば・紅葉・秋の花と、蕎麦屋や茶菓の店を、ジャンル別に地図と一覧でまとめたもの。">
 <meta name="twitter:card" content="summary">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%93%8D%3C/text%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8D%81%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho+B1:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
   color-scheme:light dark;
-  --ground:#F2F4EF; --card:#FBFCFA;
-  --ink:#16241D; --ink-2:#53645A; --ink-3:#87958C;
-  --ai:#1D4A57; --yusui:#3E8C9B; --shu:#A8402A;
-  --koke:#7A8A66; --koke-2:#B9C4AC;
-  --line:#CBD5CB; --on-accent:#FFFFFF;
-  --st-open-bg:#E2EDE6;   --st-open-fg:#245C3B;
-  --st-closed-bg:#F3E0DC; --st-closed-fg:#A8402A;
-  --st-check-bg:#FBEFD6;  --st-check-fg:#8A5B12;
+  --ground:#F5F0E7; --card:#FCFAF5;
+  --ink:#2B2320; --ink-2:#66594F; --ink-3:#9C8E81;
+  --ai:#7A3B2E; --yusui:#A87C3F; --shu:#B23B1E;
+  --mizu:#5B7A80;
+  --koke:#7D7A4A; --koke-2:#C7BE9C;
+  --line:#DFD5C5; --on-accent:#FDF9F3;
+  --st-open-bg:#E9EBDC;   --st-open-fg:#4C5B2F;
+  --st-closed-bg:#F3E2DB; --st-closed-fg:#A8402A;
+  --st-check-bg:#F7EBD3;  --st-check-fg:#8A5B12;
   --disp:"Shippori Mincho B1",serif;
   --body:"Zen Kaku Gothic New",system-ui,sans-serif;
 }
 @media (prefers-color-scheme:dark){
   :root{
-    --ground:#131A17; --card:#1A231F;
-    --ink:#E9EEE8; --ink-2:#A7B4AA; --ink-3:#78867C;
-    --ai:#63A7B8; --yusui:#79C4D0; --shu:#DE7458;
-    --koke:#94A67E; --koke-2:#5E6E52;
-    --line:#2F3C35; --on-accent:#101C1A;
-    --st-open-bg:#1D3728;   --st-open-fg:#8FD3A8;
-    --st-closed-bg:#3B241E; --st-closed-fg:#EC9A83;
-    --st-check-bg:#392F1B;  --st-check-fg:#E2BE76;
+    --ground:#191411; --card:#231C18;
+    --ink:#EFE7DC; --ink-2:#B5A797; --ink-3:#8A7D70;
+    --ai:#D18E6E; --yusui:#DFB273; --shu:#E4794F;
+    --mizu:#8FB4BB;
+    --koke:#A9A472; --koke-2:#5F5B3C;
+    --line:#3B302A; --on-accent:#1A1310;
+    --st-open-bg:#2C3520;   --st-open-fg:#B8C98A;
+    --st-closed-bg:#3D251E; --st-closed-fg:#EDA087;
+    --st-check-bg:#3A2F1B;  --st-check-fg:#E4C078;
   }
   .area-rule{opacity:.55}
 }
@@ -48,10 +50,11 @@ html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;padding-bottom:64px}
 .wrap{max-width:680px;margin:0 auto;padding:0 18px}
 
-.hero{padding:40px 0 0}
-.hero-eyebrow{font-size:11px;letter-spacing:.28em;color:var(--yusui);font-weight:700;margin-bottom:14px}
-.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(30px,8.4vw,50px);line-height:1.2;letter-spacing:.03em;white-space:nowrap}
-.hero h1 em{font-style:normal;color:var(--ai);letter-spacing:.12em;margin-left:.18em}
+.hero{padding:54px 0 0}
+.hero-eyebrow{font-size:11px;letter-spacing:.28em;color:var(--yusui);font-weight:700;margin-bottom:16px}
+.hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(32px,9vw,52px);line-height:1.18;letter-spacing:.06em;white-space:nowrap}
+.hero h1 em{font-style:normal;color:var(--ai);letter-spacing:.14em;margin-left:.2em}
+.hero-lead{margin-top:14px;font-family:var(--disp);font-size:14.5px;color:var(--ink-2);letter-spacing:.12em}
 
 
 .wx{
@@ -70,16 +73,16 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .wx-desc{font-size:11px;color:var(--ink-3);line-height:1.4}
 .wx-temp{font-family:var(--disp);font-size:13.5px;letter-spacing:.02em;font-variant-numeric:tabular-nums}
 .wx-temp b{color:var(--shu);font-weight:700}
-.wx-temp i{font-style:normal;color:var(--yusui);font-weight:700}
+.wx-temp i{font-style:normal;color:var(--mizu);font-weight:700}
 .wx-pop{font-size:11px;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .wx-note{grid-column:1/-1;align-self:center;padding:0 14px;color:var(--ink-3)}
 .legend{display:flex;flex-wrap:wrap;gap:5px 16px;padding:24px 0 0}
 .legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
 .chip-band{width:9px;height:9px;border-radius:50%;flex:none}
 .b-in{background:var(--ai)} .b-shade{background:var(--koke)}
-.b-water{background:var(--yusui)} .b-sun{background:var(--shu)}
+.b-water{background:var(--mizu)} .b-sun{background:var(--shu)}
 
-/* ---------- タブ：風鈴の短冊 ---------- */
+/* ---------- タブ：短冊 ---------- */
 .tabs{position:sticky;top:0;z-index:5;background:var(--ground);padding-bottom:18px;margin-top:22px}
 .tabs-row{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-top:14px;border-top:1px solid var(--line)}
 .tabs-row::-webkit-scrollbar{display:none}
@@ -106,13 +109,14 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 
 .card{
   position:relative;background:var(--card);border:1px solid var(--line);border-left:none;
-  border-radius:0 4px 4px 0;padding:15px 16px 14px 17px;margin-bottom:10px;
+  border-radius:0 4px 4px 0;padding:17px 18px 16px 19px;margin-bottom:11px;
   display:flex;flex-direction:column;gap:9px;scroll-margin-top:88px;
+  box-shadow:0 1px 2px rgba(43,35,32,.045);
 }
 .card::before{content:"";position:absolute;left:0;top:-1px;bottom:-1px;width:5px;border-radius:4px 0 0 4px}
 .card.shade-in::before{background:var(--ai)}
 .card.shade-shade::before{background:repeating-linear-gradient(135deg,var(--koke) 0 4px,var(--koke-2) 4px 8px)}
-.card.shade-water::before{background:var(--yusui)}
+.card.shade-water::before{background:var(--mizu)}
 .card.shade-sun::before{background:var(--shu)}
 
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
@@ -176,7 +180,8 @@ footer b{color:var(--ink-2)}
 
   <header class="hero">
     <div class="hero-eyebrow">調布市 深大寺・神代植物公園</div>
-    <h1>📍深大寺<em>MAP</em></h1>
+    <h1>深大寺<em>MAP</em></h1>
+    <p class="hero-lead">新そばと紅葉の頃に。</p>
     <div class="wx" id="wx" aria-live="polite">
       <span class="wx-note">天気を読み込み中…</span>
     </div>
@@ -184,9 +189,9 @@ footer b{color:var(--ink-2)}
 
   <div class="legend">
     <span class="legend-item"><i class="chip-band b-in"></i>屋内</span>
-    <span class="legend-item"><i class="chip-band b-shade"></i>木陰・外席</span>
+    <span class="legend-item"><i class="chip-band b-shade"></i>外席あり</span>
     <span class="legend-item"><i class="chip-band b-water"></i>水辺</span>
-    <span class="legend-item"><i class="chip-band b-sun"></i>日向あり</span>
+    <span class="legend-item"><i class="chip-band b-sun"></i>日当たり</span>
   </div>
 
   <nav class="tabs" aria-label="ジャンルで絞り込む">
@@ -199,31 +204,33 @@ footer b{color:var(--ink-2)}
   <section class="area bus">
     <div class="area-head">
       <h2>🚌 バス</h2>
-      <span class="area-sub">8月14日（金）のダイヤ</span>
+      <span class="area-sub">通常ダイヤ</span>
     </div>
     <div class="area-rule"></div>
-
-    <div class="bus-alert">
-      <span>⚠️</span>
-      <span>8/12〜8/15は<b>お盆の特別ダイヤ</b>。「金曜だから平日ダイヤ」で調べると時刻が全部ズレる。</span>
-    </div>
 
     <div class="bus-card">
       <div class="bus-route">行き　三鷹駅南口 → 深大寺</div>
       <div class="bus-meta">小田急バス 鷹65 ／ 約25分</div>
-      <div class="bus-line"><span class="bus-when">8〜17時台</span><span class="bus-t"><b>毎時 10分・40分</b>　30分間隔</span></div>
+      <div class="bus-line"><span class="bus-when">土日祝</span><span class="bus-t"><b>毎時 10分・40分</b>　8〜17時台は30分間隔</span></div>
+      <div class="bus-line"><span class="bus-when">平日</span><span class="bus-t">1時間に1〜2本　間隔が空くので時刻を見てから動く</span></div>
     </div>
 
     <div class="bus-card">
       <div class="bus-route">帰り　深大寺 → 調布駅北口</div>
       <div class="bus-meta">京王バス 調34 ／ 約15分 ／ 新宿へは調布から京王線特急で約17分</div>
-      <div class="bus-line"><span class="bus-when">9〜17時台</span><span class="bus-t">1時間に4〜5本（10〜20分おき）</span></div>
+      <div class="bus-line"><span class="bus-when">平日・土日祝</span><span class="bus-t"><b>1時間に3〜5本</b>　日中はこれが本命</span></div>
     </div>
 
     <div class="bus-card">
       <div class="bus-route">帰り　深大寺 → 三鷹駅</div>
       <div class="bus-meta">小田急バス 鷹65 ／ 約27分</div>
-      <div class="bus-line"><span class="bus-when">10〜18時台</span><span class="bus-t">毎時 06分・36分</span></div>
+      <div class="bus-line"><span class="bus-when">土日祝</span><span class="bus-t">10〜18時台は<b>毎時 06分・36分</b></span></div>
+      <div class="bus-line"><span class="bus-when">平日</span><span class="bus-t">1時間に1〜2本</span></div>
+    </div>
+
+    <div class="bus-alert">
+      <span>🍂</span>
+      <span><b>秋は日が短い。</b>三鷹ゆきの終バスは<b>18:36前後</b>、調布ゆきも夜は本数が落ちる。11月なら16:30頃には暗くなるので、紅葉を見るなら午後の早いうちに。</span>
     </div>
   </section>
 
@@ -233,8 +240,8 @@ footer b{color:var(--ink-2)}
   </div>
 
   <footer>
-    <b>営業状況は8月14日（金）時点。曜日の定休はどこも当たらない。</b>お盆だが観光地なので基本は営業しているはず。ただし個人店は臨時休業の可能性もあるので、外したくない店は電話で確認を。<br>
-    評価と営業時間はGoogleマップより。
+    <b>秋の見どころは例年の時期。</b>紅葉もイベントも年ごとに前後するので、日程が決まったら深大寺と神代植物公園の公式で確認を。個人店は臨時休業もあるため、外したくない店は電話が確実。<br>
+    評価と営業時間はGoogleマップ、支払い方法は食べログより。
   </footer>
 
 </div>
@@ -242,68 +249,72 @@ footer b{color:var(--ink-2)}
 <script>
 
 const SHOPS = [
-  /* ===== 夏のもの ===== */
-  {id:"hoozuki", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["natsu"], name:"ほおずきハッピーゲート", shade:"sun",
-   status:"open", statusText:"8月中旬まで", hours:"深大寺 山門",
-   note:"提灯に見立てたほおずきを並べて精霊を迎える、深大寺の夏の設え。山門に例年7月13日頃から8月15日頃まで置かれる。同じ期間、夏の特別御朱印とお守りが授与される（なくなり次第終了）。鬼燈まつり本体は例年7月中旬から下旬の3日間。",
+  /* ===== 秋のもの ===== */
+  {id:"kouyou", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["aki","spot"], name:"境内の紅葉", shade:"shade",
+   status:"check", statusText:"11月下旬〜12月上旬", hours:"深大寺 境内 ／ 終日",
+   note:"本堂裏手から深沙堂へ抜ける斜面と、山門まわりのもみじが色づく。例年の見頃は11月下旬から12月上旬。茅葺きの山門と紅葉が重なる一角が写真に向く。朝のうちは人が少ない。",
    map:"https://maps.google.com/?cid=8224161598012187145"},
-  {id:"jinja", area:"sando", panel:"a", noFood:true, genres:["natsu","spot"], name:"深沙堂", shade:"water",
+  {id:"sobamatsuri", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["aki","soba"], name:"深大寺そばまつり", shade:"sun",
+   status:"check", statusText:"例年11月下旬", hours:"深大寺 境内・参道",
+   note:"新そばの時季に合わせて例年11月下旬から12月上旬に開かれる。期間中は境内でそば守観音の供養祭があり、献上したそばが振る舞われる回もある。日程は年ごとに動くので深大寺の公式で確認を。",
+   map:"https://maps.google.com/?cid=8224161598012187145"},
+  {id:"jinja", area:"sando", panel:"a", noFood:true, genres:["spot"], name:"深沙堂", shade:"water",
    status:"open", statusText:"通年・無料", hours:"境内西端 ／ 終日",
    note:"深大寺の名の由来である水神、深沙大王を祀る御堂。現在の建物は1968年の再建で、市の有形文化財。天井に龍の絵がある。まわりを湧水が流れ、本堂周辺より人が少ない。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+深沙大王堂"},
-  {id:"stamp", area:"park", noFood:true, genres:["natsu"], name:"クールスポット スタンプラリー", shade:"shade",
-   status:"open", statusText:"開催中", hours:"神代植物公園・深大寺 ／ 参加無料",
-   note:"神代植物公園と深大寺が7月1日から共同で実施しているデジタル版のスタンプラリー。園内と境内の涼しい場所をめぐる趣旨で、スマートフォンから参加できる。",
+  {id:"kaede", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki","spot"], name:"かえで園の紅葉", shade:"shade",
+   status:"check", statusText:"11月下旬〜12月上旬", hours:"園内 ／ 入園500円",
+   note:"かえで園に約60種のもみじが植わり、種類ごとに色づく時期がずれるので見頃が長い。つつじ園のケヤキの大木も同じ頃に赤や橙に染まる。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
 
-  {id:"fuurin", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["natsu"], name:"朝顔と風鈴回廊", shade:"shade",
-   status:"open", statusText:"8月30日まで", hours:"金 9:30–17:00 ／ 入園500円",
-   note:"神代植物公園の企画「江戸の夏を歩く」。木漏れ日の落ちるせせらぎの小路に風鈴の回廊が設けられ、正門と深大寺門には風鈴門と変化朝顔が並ぶ。朝顔は昼前に萎む。",
+  {id:"bara", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki"], name:"秋のバラフェスタ", shade:"sun",
+   status:"check", statusText:"例年10月上旬〜11月中旬", hours:"ばら園 ／ 入園500円",
+   note:"世界バラ会連合の優秀庭園賞を受けたばら園で、秋バラの開花に合わせて開かれる。園名を冠した「クィーン・オブ・神代」もこの時季に咲く。春より花数は減るが、香りは秋のほうが濃いとされる。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"shinobu", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["natsu"], name:"つりしのぶと江戸風鈴の展示", shade:"in",
-   status:"open", statusText:"8月30日まで", hours:"植物会館ホール ／ 火 9:30–17:00",
-   note:"同じ企画の屋内展示。つりしのぶはシダを束ねて軒に吊るし、涼をとる江戸の職人仕事。つりしのぶ作りのワークショップも開かれる。",
+  {id:"kikka", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki"], name:"菊花大会", shade:"shade",
+   status:"check", statusText:"例年11月上旬〜中旬", hours:"園内 ／ 入園500円",
+   note:"大菊の三本仕立てや懸崖、盆栽菊などが並ぶ品評会。丹精した鉢が一堂に集まる。猛暑の年は開花が遅れることがある。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"tenjin", area:"chofu", panel:"b", noFood:true, genres:["natsu"], name:"天神通り商店街", shade:"sun",
+  {id:"tenjin", area:"chofu", panel:"b", noFood:true, genres:["spot"], name:"天神通り商店街", shade:"sun",
    status:"open", statusText:"通年・無料", hours:"調布駅 北口すぐ",
-   note:"調布駅から布多天神社へ続く商店街。水木しげるが調布に住んでいた縁で、鬼太郎たちの像が通りに点在し、鬼太郎通りとも呼ばれる。鬼太郎茶屋とかき氷の店もこの通りに並ぶ。",
+   note:"調布駅から布多天神社へ続く商店街。水木しげるが調布に住んでいた縁で、鬼太郎たちの像が通りに点在し、鬼太郎通りとも呼ばれる。鬼太郎茶屋もこの通りにある。",
    map:"https://www.google.com/maps/search/?api=1&query=調布+天神通り商店街"},
 
   /* ===== 深大寺・参道 ===== */
-  {id:"tamanoya", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13055725/", panel:"a", genres:["soba","natsu"], name:"玉乃屋", shade:"shade",
-   status:"open", rating:"3.8 / 493件", hours:"金 10:00–15:30（月休）／ 現金のみ",
+  {id:"tamanoya", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13055725/", panel:"a", genres:["soba"], name:"玉乃屋", shade:"shade",
+   status:"open", rating:"3.8 / 493件", hours:"10:00–15:30（月休）／ 現金のみ",
    note:"十割そばと鴨。屋外席があり、地ビールの深大寺ビールを置いている。神代植物公園の正門前。",
    map:"https://maps.google.com/?cid=5327721191104570701"},
   {id:"yusui", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13010191/", panel:"a", genres:["soba"], name:"湧水", shade:"in",
-   status:"open", rating:"4.1 / 2,358件", hours:"金 10:30–18:00（木休）／ 現金・PayPay",
+   status:"open", rating:"4.1 / 2,358件", hours:"10:30–18:00（木休）／ 現金・PayPay",
    note:"参道でもっとも名の知れた店。開店直後から行列ができるが、席数があり回転は速い。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+湧水"},
   {id:"matsuba", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13033267/", panel:"a", genres:["soba"], name:"松葉茶屋", shade:"shade",
-   status:"open", rating:"4.2 / 578件", hours:"金 9:30–16:30（月休）／ カード可",
+   status:"open", rating:"4.2 / 578件", hours:"9:30–16:30（月休）／ カード可",
    note:"神代植物公園の深大寺門側、坂を上がった先。屋外席があり、犬を連れて入れる。参道の店より空いていることが多い。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+松葉茶屋"},
   {id:"daishi", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13032191/", panel:"a", genres:["soba"], name:"大師茶屋", shade:"in",
-   status:"open", rating:"4.2 / 767件", hours:"金 10:30–15:00（水休）／ 現金のみ",
+   status:"open", rating:"4.2 / 767件", hours:"10:30–15:00（水休）／ 現金のみ",
    note:"盛りが多い。十割は数量限定で、昼前に売り切れることがある。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+大師茶屋"},
   {id:"ikkyuan", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13016209/", panel:"a", genres:["soba","dango"], name:"一休庵", shade:"in",
-   status:"open", rating:"4.0 / 606件", hours:"金 11:00–15:00（月休）／ 現金のみ",
+   status:"open", rating:"4.0 / 606件", hours:"11:00–15:00（月休）／ 現金のみ",
    note:"水車のある古い建物。そばは十割・九割・八割から選べ、冷たいつけ汁で出す。そば粉で作った団子はみたらしと胡麻の二種のたれで、胡麻を推す声が多い。そば茶が付く。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+一休庵"},
   {id:"tamon", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13010173/", panel:"a", genres:["soba"], name:"多聞", shade:"shade",
-   status:"open", rating:"3.9 / 1,137件", hours:"金 10:00–15:30（月休）／ 現金のみ",
+   status:"open", rating:"3.9 / 1,137件", hours:"10:00–15:30（月休）／ 現金のみ",
    note:"参道から少し離れた大きめの店。屋外席がいくつかあり、店内で土産物も扱う。盛りは多め。英語が通じる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+多聞"},
   {id:"kiyoshi", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13068195/", panel:"a", genres:["soba"], name:"深大寺そば きよし", shade:"in",
-   status:"open", rating:"4.0 / 482件", hours:"金 11:00–18:30（月・火休）／ カード可",
+   status:"open", rating:"4.0 / 482件", hours:"11:00–18:30（月・火休）／ カード可",
    note:"小体な店。海老天そばと鴨そばに評価が集まる。年末年始や行事の日は長く並ぶ。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+きよし"},
   {id:"yaoki", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13057896/", panel:"a", genres:["dango","soba"], name:"八起", shade:"water",
-   status:"open", rating:"3.6 / 278件", hours:"金 10:00–15:00（火・水休）／ 現金のみ ／ 042-482-0141",
+   status:"open", rating:"3.6 / 278件", hours:"10:00–15:00（火・水休）／ 現金のみ ／ 042-482-0141",
    note:"山門の横。池に面した席がある。そばのほか、そば粉の団子と餅を出す。冷たいそばと温かいそばを選べる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+八起"},
   {id:"ameya", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13090474/", panel:"a", genres:["dango"], name:"あめや", shade:"sun",
-   status:"open", rating:"4.0 / 103件", hours:"金 10:00–15:00（月・木休）／ 現金のみ",
+   status:"open", rating:"4.0 / 103件", hours:"10:00–15:00（月・木休）／ 現金のみ",
    note:"山門の並び。そばパンは野沢菜やキーマカレーを包んだ惣菜系で、甘めのもっちりした生地。焼き草もち、そばまんじゅうも並ぶ。席はなく、店先で立って食べる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+あめや"},
   {id:"baigetsu", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13193648/", panel:"a", genres:["dango"], name:"梅月", shade:"in",
@@ -321,37 +332,37 @@ const SHOPS = [
 
   /* ===== 神代植物公園 ===== */
   {id:"jindaipark", area:"park", panel:"a", noFood:true, genres:["spot"], name:"神代植物公園", shade:"shade",
-   status:"open", rating:"4.3 / 6,486件", hours:"金 9:30–17:00（最終入園16:00・月休）／ 500円",
-   note:"武蔵野の雑木林が残る都立の植物公園。ばら園は約400種5,200株。大温室は熱帯植物を集めた屋内施設で、夏は室温が上がる。",
+   status:"open", rating:"4.3 / 6,486件", hours:"9:30–17:00（最終入園16:00・月休）／ 500円",
+   note:"武蔵野の雑木林が残る都立の植物公園。ばら園は約400種5,200株で、秋バラは10月から11月中旬。かえで園の紅葉は11月下旬から。大温室は熱帯植物を集めた屋内施設で、冷えた日の避難先になる。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"suisei", area:"park", panel:"a", noFood:true, genres:["spot","natsu"], name:"水生植物園", shade:"water",
-   status:"open", rating:"4.1 / 176件", hours:"金 9:30–16:30（月休）／ 無料",
+  {id:"suisei", area:"park", panel:"a", noFood:true, genres:["spot"], name:"水生植物園", shade:"water",
+   status:"open", rating:"4.1 / 176件", hours:"9:30–16:30（月休）／ 無料",
    note:"深大寺から東へ徒歩5分の湿地に木道が渡されている。湧水と深大寺城跡があり、神代植物公園の一部だが入園は無料。",
    map:"https://maps.google.com/?cid=5473221735308242460"},
   {id:"greensalon", area:"park", panel:"a", genres:["spot"], name:"グリーンサロン", shade:"in",
-   status:"open", rating:"3.8 / 33件", hours:"金 9:30–17:00（月休）",
+   status:"open", rating:"3.8 / 33件", hours:"9:30–17:00（月休）",
    note:"神代植物公園の園内カフェ。深大寺養蜂園のはちみつを使ったカレーが名物。屋内席とテラス席があり、先に注文して席で待つ方式。",
    map:"https://maps.google.com/?cid=15233203860007683140"},
 
   /* ===== 調布駅前・天神通り ===== */
-  {id:"anand", area:"chofu", panel:"b", genres:["kori"], name:"甘味an&", shade:"in",
-   status:"open", rating:"3.9 / 36件", hours:"金 11:00–21:00",
-   note:"季節の素材を使ったかき氷。氷の中にも具が仕込まれる。抹茶あずきで1,300円ほど。あんみつなどの甘味もある。あずきや安藤の姉妹店で、2022年開店。",
+  {id:"anand", area:"chofu", panel:"b", genres:["dango"], name:"甘味an&", shade:"in",
+   status:"open", rating:"3.9 / 36件", hours:"11:00–21:00",
+   note:"あんみつやぜんざいなどの甘味処。かき氷は季節の素材で通年出しており、氷の中にも具が仕込まれる。あずきや安藤の姉妹店で、2022年開店。夜21時まで開いている。",
    map:"https://maps.google.com/?cid=12442747606617253566"},
-  {id:"azukiya", area:"chofu", panel:"b", genres:["kori","dango"], name:"あずきや安藤", shade:"sun",
+  {id:"azukiya", area:"chofu", panel:"b", genres:["dango"], name:"あずきや安藤", shade:"sun",
    status:"open", rating:"4.0 / 207件", hours:"毎日 10:30–18:30",
-   note:"北海道産の小豆を銅釜で炊いた粒あんの今川焼と、かき氷。生地に黒ごまが入る。今川焼は200円ほど。テイクアウト専門で席はない。",
+   note:"北海道産の小豆を銅釜で炊いた粒あんの今川焼。生地に黒ごまが入る。200円ほど。冷える時季は焼きたてが効く。テイクアウト専門で席はない。",
    map:"https://maps.google.com/?cid=16583204490180936106"},
-  {id:"kitaro", area:"chofu", panel:"b", genres:["kori"], name:"鬼太郎茶屋", shade:"in",
+  {id:"kitaro", area:"chofu", panel:"b", genres:["dango"], name:"鬼太郎茶屋", shade:"in",
    status:"open", rating:"4.1 / 1,504件", hours:"10:00–18:00 ／ 042-482-4059",
-   note:"妖怪をモチーフにした甘味とグッズの店。グッズは350種類以上。深大寺の参道にあった店舗は2024年8月に閉店し、同年11月に天神通りへ移転した。7月からかき氷を出す。",
+   note:"妖怪をモチーフにした甘味とグッズの店。グッズは350種類以上。深大寺の参道にあった店舗は2024年8月に閉店し、同年11月に天神通りへ移転した。",
    map:"https://maps.google.com/?cid=6072209734608962775"},
-  {id:"kumokuma", area:"chofu", panel:"b", genres:["kori"], name:"パクパクくもくま堂", shade:"in",
-   status:"open", rating:"4.1 / 176件", hours:"金 営業（月・火休）",
-   note:"クマの形のかき氷で知られる専門店。メニューは日替わりで6種ほど。LINEか電話で予約できる。調布駅から徒歩10分弱。",
+  {id:"kumokuma", area:"chofu", panel:"b", genres:["dango"], name:"パクパクくもくま堂", shade:"in",
+   status:"open", rating:"4.1 / 176件", hours:"月・火休 ／ 通年営業",
+   note:"クマの形のかき氷で知られる専門店。冬もやっており、秋は焼き芋やモンブランなど季節の味が出る。メニューは日替わりで6種ほど。LINEか電話で予約できる。調布駅から徒歩10分弱。",
    map:"https://maps.google.com/?cid=1990523650059546140"},
   {id:"oimono", area:"chofu", panel:"b", genres:["dango"], name:"おいものおうち 調布店", shade:"in",
-   status:"open", rating:"4.7 / 131件", hours:"金 11:30–19:00（火・水休）",
+   status:"open", rating:"4.7 / 131件", hours:"11:30–19:00（火・水休）",
    note:"焼き芋の専門店。さつまいものスムージーやスープ、大福もある。イートインの席がある。",
    map:"https://www.google.com/maps/search/?api=1&query=おいものおうち+調布店"}
 ];
@@ -363,17 +374,16 @@ const AREAS = [
 ];
 const GENRES = [
   {id:"all",   label:"すべて"},
-  {id:"natsu", label:"夏"},
+  {id:"aki",   label:"秋"},
   {id:"soba",  label:"蕎麦"},
   {id:"dango", label:"茶菓"},
-  {id:"kori",  label:"かき氷"},
   {id:"spot",  label:"見所"}
 ];
-const SHADE_LABEL = {in:"屋内", shade:"木陰・外席", water:"水辺", sun:"日向あり"};
+const SHADE_LABEL = {in:"屋内", shade:"外席あり", water:"水辺", sun:"日当たり"};
 const STATUS = {
-  open:  {cls:"st-open",   label:"8/14 営業"},
-  closed:{cls:"st-closed", label:"8/14 休み"},
-  check: {cls:"st-check",  label:"8/14 要確認"}
+  open:  {cls:"st-open",   label:"営業"},
+  closed:{cls:"st-closed", label:"休み"},
+  check: {cls:"st-check",  label:"要確認"}
 };
 /* noFood: 飲食店ではないもの。食べログのボタンを出さない */
 const BY_ID = Object.fromEntries(SHOPS.map(s => [s.id, s]));

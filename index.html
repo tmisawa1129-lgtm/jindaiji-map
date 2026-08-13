@@ -161,7 +161,7 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .bus-alert.solo{margin-top:26px}
 .bus[hidden],.bus-alert[hidden]{display:none}
 /* ---------- いつ行くか ---------- */
-.months{margin-top:38px}
+.months{margin-top:32px}
 .months[hidden]{display:none}
 .mo{padding:11px 0;border-top:1px dotted var(--line)}
 .mo:first-child{border-top:none;padding-top:2px}
@@ -207,20 +207,6 @@ footer b{color:var(--ink-2)}
     </div>
   </header>
 
-  <div class="legend">
-    <span class="legend-item"><i class="chip-band b-in"></i>屋内</span>
-    <span class="legend-item"><i class="chip-band b-shade"></i>外席あり</span>
-    <span class="legend-item"><i class="chip-band b-water"></i>水辺</span>
-    <span class="legend-item"><i class="chip-band b-sun"></i>日当たり</span>
-  </div>
-
-  <nav class="tabs" aria-label="ジャンルで絞り込む">
-    <div class="tabs-row" id="tabs-row"></div>
-  </nav>
-
-  <main id="list"></main>
-  <p class="empty" id="empty" hidden>この条件に合うものはない。</p>
-
   <section class="area months">
     <div class="area-head">
       <h2>🍂 いつ行くか</h2>
@@ -251,6 +237,20 @@ footer b{color:var(--ink-2)}
       </div>
     </div>
   </section>
+
+  <div class="legend">
+    <span class="legend-item"><i class="chip-band b-in"></i>屋内</span>
+    <span class="legend-item"><i class="chip-band b-shade"></i>外席あり</span>
+    <span class="legend-item"><i class="chip-band b-water"></i>水辺</span>
+    <span class="legend-item"><i class="chip-band b-sun"></i>日当たり</span>
+  </div>
+
+  <nav class="tabs" aria-label="ジャンルで絞り込む">
+    <div class="tabs-row" id="tabs-row"></div>
+  </nav>
+
+  <main id="list"></main>
+  <p class="empty" id="empty" hidden>この条件に合うものはない。</p>
 
   <section class="area bus">
     <div class="area-head">
@@ -500,7 +500,7 @@ function render(){
 
   /* バス・現金メモは「すべて」のときだけ出す */
   const isAll = current === "all";
-  document.querySelectorAll(".months, .bus, .bus-alert.solo").forEach(el => { el.hidden = !isAll; });
+  document.querySelectorAll(".bus, .bus-alert.solo").forEach(el => { el.hidden = !isAll; });
 }
 
 rowEl.addEventListener("click", e => {

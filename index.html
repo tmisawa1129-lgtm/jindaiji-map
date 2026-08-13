@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>深大寺MAP｜秋</title>
-<meta name="description" content="深大寺と神代植物公園まわりの新そば・紅葉・秋の花と、蕎麦屋や茶菓の店を、ジャンル別に地図と一覧でまとめたもの。">
+<title>深大寺MAP｜晩夏から秋へ</title>
+<meta name="description" content="深大寺と神代植物公園まわりの、残暑のかき氷から萩・秋バラ・新そば・紅葉まで。蕎麦屋や茶菓の店をジャンル別に地図と一覧でまとめたもの。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="深大寺MAP">
-<meta property="og:title" content="深大寺MAP｜秋">
-<meta property="og:description" content="深大寺と神代植物公園まわりの新そば・紅葉・秋の花と、蕎麦屋や茶菓の店を、ジャンル別に地図と一覧でまとめたもの。">
+<meta property="og:title" content="深大寺MAP｜晩夏から秋へ">
+<meta property="og:description" content="深大寺と神代植物公園まわりの、残暑のかき氷から萩・秋バラ・新そば・紅葉まで。蕎麦屋や茶菓の店をジャンル別に地図と一覧でまとめたもの。">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8D%81%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,8 +22,8 @@
   --ground:#F5F0E7; --card:#FCFAF5;
   --ink:#2B2320; --ink-2:#66594F; --ink-3:#9C8E81;
   --ai:#7A3B2E; --yusui:#A87C3F; --shu:#B23B1E;
-  --mizu:#5B7A80;
-  --koke:#7D7A4A; --koke-2:#C7BE9C;
+  --mizu:#4F7F88;
+  --koke:#6F7F4C; --koke-2:#BEC49E;
   --line:#DFD5C5; --on-accent:#FDF9F3;
   --st-open-bg:#E9EBDC;   --st-open-fg:#4C5B2F;
   --st-closed-bg:#F3E2DB; --st-closed-fg:#A8402A;
@@ -36,8 +36,8 @@
     --ground:#191411; --card:#231C18;
     --ink:#EFE7DC; --ink-2:#B5A797; --ink-3:#8A7D70;
     --ai:#D18E6E; --yusui:#DFB273; --shu:#E4794F;
-    --mizu:#8FB4BB;
-    --koke:#A9A472; --koke-2:#5F5B3C;
+    --mizu:#86B7C1;
+    --koke:#9DAE76; --koke-2:#5C6640;
     --line:#3B302A; --on-accent:#1A1310;
     --st-open-bg:#2C3520;   --st-open-fg:#B8C98A;
     --st-closed-bg:#3D251E; --st-closed-fg:#EDA087;
@@ -201,7 +201,7 @@ footer b{color:var(--ink-2)}
   <header class="hero">
     <div class="hero-eyebrow">調布市 深大寺・神代植物公園</div>
     <h1>深大寺<em>MAP</em></h1>
-    <p class="hero-lead">新そばと紅葉の頃に。</p>
+    <p class="hero-lead">残暑のかき氷から、新そばと紅葉まで。</p>
     <div class="wx" id="wx" aria-live="polite">
       <span class="wx-note">天気を読み込み中…</span>
     </div>
@@ -217,11 +217,11 @@ footer b{color:var(--ink-2)}
     <div class="bus-card">
       <div class="mo">
         <div class="mo-h"><span class="mo-m">8月</span><span class="mo-t">最高32℃前後 ／ 猛暑</span></div>
-        <div class="mo-b">ほおずきハッピーゲート（例年〜8/15頃）、朝顔と風鈴回廊（〜8月末）、かき氷。日中は屋内か木陰に逃げる前提で組む。</div>
+        <div class="mo-b">ほおずきハッピーゲート（例年〜8/15頃）、朝顔と風鈴回廊（〜8月末）。かき氷と水辺を軸に、日中は屋内か木陰へ。夕方の参道が涼しくていい。</div>
       </div>
       <div class="mo">
         <div class="mo-h"><span class="mo-m">9月</span><span class="mo-t">最高28℃前後 ／ 残暑</span></div>
-        <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲き始める。まだ夏の陽気。</div>
+        <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲き始める。残暑が続くので、かき氷がいちばんうまい時期でもある。</div>
       </div>
       <div class="mo best">
         <div class="mo-h"><span class="mo-m">10月</span><span class="mo-t">最高22℃前後 ／ 歩きやすい</span></div>
@@ -313,11 +313,15 @@ const SHOPS = [
    status:"open", statusText:"通年・無料", hours:"境内西端 ／ 終日",
    note:"深大寺の名の由来である水神、深沙大王を祀る御堂。現在の建物は1968年の再建で、市の有形文化財。天井に龍の絵がある。まわりを湧水が流れ、本堂周辺より人が少ない。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+深沙大王堂"},
-  {id:"kaede", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki","spot"], name:"かえで園の紅葉", shade:"shade",
-   status:"check", statusText:"11月下旬〜12月上旬", hours:"園内 ／ 入園500円",
-   note:"かえで園に約60種のもみじが植わり、種類ごとに色づく時期がずれるので見頃が長い。つつじ園のケヤキの大木も同じ頃に赤や橙に染まる。",
-   map:"https://maps.google.com/?cid=9763061280357406539"},
 
+  {id:"hagi", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki"], name:"はぎ園と秋の七草", shade:"shade",
+   status:"check", statusText:"8月〜10月上旬", hours:"はぎ園 ／ 入園500円",
+   note:"萩が10品種110株、8月から10月上旬にかけて咲き継ぐ。同じ一角にキキョウやオミナエシなど秋の七草が植えられている。残暑のうちから秋がはじまっている場所。",
+   map:"https://maps.google.com/?cid=9763061280357406539"},
+  {id:"dahlia", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki"], name:"だりあ園", shade:"sun",
+   status:"check", statusText:"9月下旬〜10月", hours:"だりあ園 ／ 入園500円",
+   note:"ダリアは暑さにも寒さにも弱く、本番は10月頃。9月から咲き始めるが、涼しくなるほど花色が冴える。",
+   map:"https://maps.google.com/?cid=9763061280357406539"},
   {id:"bara", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki"], name:"秋のバラフェスタ", shade:"sun",
    status:"check", statusText:"例年10月上旬〜11月中旬", hours:"ばら園 ／ 入園500円",
    note:"世界バラ会連合の優秀庭園賞を受けたばら園で、秋バラの開花に合わせて開かれる。園名を冠した「クィーン・オブ・神代」もこの時季に咲く。春より花数は減るが、香りは秋のほうが濃いとされる。",
@@ -325,6 +329,10 @@ const SHOPS = [
   {id:"kikka", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki"], name:"菊花大会", shade:"shade",
    status:"check", statusText:"例年11月上旬〜中旬", hours:"園内 ／ 入園500円",
    note:"大菊の三本仕立てや懸崖、盆栽菊などが並ぶ品評会。丹精した鉢が一堂に集まる。猛暑の年は開花が遅れることがある。",
+   map:"https://maps.google.com/?cid=9763061280357406539"},
+  {id:"kaede", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki","spot"], name:"かえで園の紅葉", shade:"shade",
+   status:"check", statusText:"11月下旬〜12月上旬", hours:"園内 ／ 入園500円",
+   note:"かえで園に約60種のもみじが植わり、種類ごとに色づく時期がずれるので見頃が長い。つつじ園のケヤキの大木も同じ頃に赤や橙に染まる。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
   {id:"tenjin", area:"chofu", panel:"b", noFood:true, genres:["spot"], name:"天神通り商店街", shade:"sun",
    status:"open", statusText:"通年・無料", hours:"調布駅 北口すぐ",

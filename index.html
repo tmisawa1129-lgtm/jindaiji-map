@@ -155,6 +155,21 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 }
 .bus-alert.solo{margin-top:26px}
 .bus[hidden],.bus-alert[hidden]{display:none}
+/* ---------- いつ行くか ---------- */
+.months{margin-top:38px}
+.months[hidden]{display:none}
+.mo{padding:11px 0;border-top:1px dotted var(--line)}
+.mo:first-child{border-top:none;padding-top:2px}
+.mo-h{display:flex;align-items:baseline;gap:11px;margin-bottom:3px}
+.mo-m{font-family:var(--disp);font-size:15.5px;font-weight:700;color:var(--ai);letter-spacing:.06em}
+.mo-t{font-size:11px;color:var(--ink-3);letter-spacing:.03em}
+.mo-b{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+.mo.best .mo-m{position:relative}
+.mo.best .mo-m::after{
+  content:"おすすめ";margin-left:9px;padding:2px 7px;border-radius:2px;vertical-align:2px;
+  font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.08em;
+  background:var(--st-open-bg);color:var(--st-open-fg);
+}
 .bus-card{
   background:var(--card);border:1px solid var(--line);
   border-radius:4px;padding:14px 16px;margin-bottom:10px;
@@ -200,6 +215,37 @@ footer b{color:var(--ink-2)}
 
   <main id="list"></main>
   <p class="empty" id="empty" hidden>この条件に合うものはない。</p>
+
+  <section class="area months">
+    <div class="area-head">
+      <h2>🍂 いつ行くか</h2>
+      <span class="area-sub">8月〜11月の見どころ</span>
+    </div>
+    <div class="area-rule"></div>
+
+    <div class="bus-card">
+      <div class="mo">
+        <div class="mo-h"><span class="mo-m">8月</span><span class="mo-t">最高32℃前後 ／ 猛暑</span></div>
+        <div class="mo-b">ほおずきハッピーゲート（例年〜8/15頃）、朝顔と風鈴回廊（〜8月末）、かき氷。日中は屋内か木陰に逃げる前提で組む。</div>
+      </div>
+      <div class="mo">
+        <div class="mo-h"><span class="mo-m">9月</span><span class="mo-t">最高28℃前後 ／ 残暑</span></div>
+        <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲き始める。まだ夏の陽気。</div>
+      </div>
+      <div class="mo best">
+        <div class="mo-h"><span class="mo-m">10月</span><span class="mo-t">最高22℃前後 ／ 歩きやすい</span></div>
+        <div class="mo-b">秋のバラフェスタが開幕（例年10月上旬〜11月中旬）。ダリアが本番を迎え、金木犀が香る。気候はこの時期がいちばん良い。</div>
+      </div>
+      <div class="mo best">
+        <div class="mo-h"><span class="mo-m">11月 上〜中旬</span><span class="mo-t">最高18〜15℃ ／ 快適</span></div>
+        <div class="mo-b">菊花大会と秋バラの終盤が重なる。新そばが出始め、もみじも色づき始める。寒さを避けつつ秋を取るならここ。</div>
+      </div>
+      <div class="mo">
+        <div class="mo-h"><span class="mo-m">11月 下旬</span><span class="mo-t">最高14℃前後 ／ 朝は10℃以下</span></div>
+        <div class="mo-b">紅葉のピークと深大寺そばまつり。景色はいちばんだが、しっかり寒い。上着が要る。</div>
+      </div>
+    </div>
+  </section>
 
   <section class="area bus">
     <div class="area-head">
@@ -449,7 +495,7 @@ function render(){
 
   /* バス・現金メモは「すべて」のときだけ出す */
   const isAll = current === "all";
-  document.querySelectorAll(".bus, .bus-alert.solo").forEach(el => { el.hidden = !isAll; });
+  document.querySelectorAll(".months, .bus, .bus-alert.solo").forEach(el => { el.hidden = !isAll; });
 }
 
 rowEl.addEventListener("click", e => {

@@ -81,6 +81,13 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .wx-temp i{font-style:normal;color:var(--mizu);font-weight:700}
 .wx-pop{font-size:9.5px;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .wx-note{grid-column:1/-1;align-self:center;padding:0 14px;color:var(--ink-3)}
+.wx-live{
+  display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;
+  margin-top:8px;font-size:11.5px;color:var(--ink-3);letter-spacing:.02em;
+}
+.wx-live b{font-family:var(--disp);font-size:13px;font-weight:700;color:var(--ink)}
+.wx-live .wx-live-t{color:var(--ink-2)}
+.wx-live-note{width:100%;margin-top:2px;line-height:1.6;opacity:.9}
 .legend{display:flex;flex-wrap:wrap;gap:5px 16px;padding:24px 0 0}
 .legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
 .chip-band{width:9px;height:9px;border-radius:50%;flex:none}
@@ -205,6 +212,7 @@ footer b{color:var(--ink-2)}
     <div class="wx" id="wx" aria-live="polite">
       <span class="wx-note">天気を読み込み中…</span>
     </div>
+    <p class="wx-live" id="wx-live" hidden></p>
   </header>
 
   <section class="area months">
@@ -525,7 +533,8 @@ render();
 
 
 /* ── 天気（Open-Meteo・深大寺） ─────────────── */
-const wxEl = document.getElementById("wx");
+const wxEl   = document.getElementById("wx");
+const liveEl = document.getElementById("wx-live");
 
 const WX_CODE = {
   0:["☀️","快晴"], 1:["🌤️","晴れ"], 2:["⛅","一部くもり"], 3:["☁️","くもり"],
@@ -543,6 +552,7 @@ const WX_CODE = {
 /* 開いた日から1週間分の予報を出す */
 const WX_URL = "https://api.open-meteo.com/v1/forecast"
   + "?latitude=35.6672&longitude=139.5486"
+  + "&current=temperature_2m,weather_code"
   + "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max"
   + "&timezone=Asia%2FTokyo&forecast_days=7";
 
@@ -571,6 +581,16 @@ async function loadWeather(){
         + (pop == null ? "" : `<span class="wx-pop">${pop}%</span>`)
         + `</div>`;
     }).join("");
+
+    /* 上の枠は「その日の代表」なので、いまの空とはズレる。実況を別に出す */
+    if(d.current){
+      const [nowIcon, nowLabel] = WX_CODE[d.current.weather_code] || ["🌡️","—"];
+      liveEl.innerHTML = `<span>いま ${d.current.time.slice(11,16)}</span>`
+        + `<span class="wx-live-t">${nowIcon} ${nowLabel}</span>`
+        + `<b>${Math.round(d.current.temperature_2m)}℃</b>`
+        + `<span class="wx-live-note">上の枠は一日の目安。降水確率はその日の最大値で、朝から降るという意味ではない。</span>`;
+      liveEl.hidden = false;
+    }
   }catch(err){
     wxEl.innerHTML = `<span class="wx-note">天気を取得できませんでした</span>`;
   }

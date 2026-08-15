@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>深大寺MAP｜晩夏から秋へ</title>
-<meta name="description" content="深大寺と神代植物公園まわりの、残暑のかき氷から萩・秋バラ・新そば・紅葉まで。蕎麦屋や茶菓の店をジャンル別に地図と一覧でまとめたもの。">
+<title>深大寺MAP｜紅葉と新そば</title>
+<meta name="description" content="深大寺の紅葉と新そばを軸に、参道の蕎麦屋・茶菓の店と神代植物公園の秋をまとめた地図。見頃と営業時間、支払い方法、バスの時刻つき。">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ja_JP">
 <meta property="og:site_name" content="深大寺MAP">
-<meta property="og:title" content="深大寺MAP｜晩夏から秋へ">
-<meta property="og:description" content="深大寺と神代植物公園まわりの、残暑のかき氷から萩・秋バラ・新そば・紅葉まで。蕎麦屋や茶菓の店をジャンル別に地図と一覧でまとめたもの。">
+<meta property="og:title" content="深大寺MAP｜紅葉と新そば">
+<meta property="og:description" content="深大寺の紅葉と新そばを軸に、参道の蕎麦屋・茶菓の店と神代植物公園の秋をまとめた地図。見頃と営業時間、支払い方法、バスの時刻つき。">
 <meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8D%81%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -176,12 +176,13 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .mo-m{font-family:var(--disp);font-size:15.5px;font-weight:700;color:var(--ai);letter-spacing:.06em}
 .mo-t{font-size:11px;color:var(--ink-3);letter-spacing:.03em}
 .mo-b{font-size:12.5px;color:var(--ink-2);line-height:1.7}
-.mo.best .mo-m{position:relative}
-.mo.best .mo-m::after{
-  content:"おすすめ";margin-left:9px;padding:2px 7px;border-radius:2px;vertical-align:2px;
+.mo.best .mo-m,.mo.peak .mo-m{position:relative}
+.mo.best .mo-m::after,.mo.peak .mo-m::after{
+  margin-left:9px;padding:2px 7px;border-radius:2px;vertical-align:2px;
   font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.08em;
-  background:var(--st-open-bg);color:var(--st-open-fg);
 }
+.mo.best .mo-m::after{content:"おすすめ";background:var(--st-open-bg);color:var(--st-open-fg)}
+.mo.peak .mo-m::after{content:"本命";background:var(--shu);color:var(--on-accent)}
 .bus-card{
   background:var(--card);border:1px solid var(--line);
   border-radius:4px;padding:14px 16px;margin-bottom:10px;
@@ -208,7 +209,7 @@ footer b{color:var(--ink-2)}
   <header class="hero">
     <div class="hero-eyebrow">調布市 深大寺・神代植物公園</div>
     <h1>深大寺<em>MAP</em></h1>
-    <p class="hero-lead">残暑のかき氷から、新そばと紅葉まで。</p>
+    <p class="hero-lead">もみじの下で、新そばを手繰る。</p>
     <div class="wx" id="wx" aria-live="polite">
       <span class="wx-note">天気を読み込み中…</span>
     </div>
@@ -231,17 +232,17 @@ footer b{color:var(--ink-2)}
         <div class="mo-h"><span class="mo-m">9月</span><span class="mo-t">最高28℃前後 ／ 残暑</span></div>
         <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲き始める。残暑が続くので、かき氷がいちばんうまい時期でもある。</div>
       </div>
-      <div class="mo best">
+      <div class="mo">
         <div class="mo-h"><span class="mo-m">10月</span><span class="mo-t">最高22℃前後 ／ 歩きやすい</span></div>
-        <div class="mo-b">秋のバラフェスタが開幕（例年10月上旬〜11月中旬）。ダリアが本番を迎え、金木犀が香る。気候はこの時期がいちばん良い。</div>
+        <div class="mo-b">気候はこの時期がいちばん良く、秋のバラフェスタが開幕してダリアも本番。ただし<b>紅葉にも新そばにもまだ早い</b>。</div>
       </div>
       <div class="mo best">
         <div class="mo-h"><span class="mo-m">11月 上〜中旬</span><span class="mo-t">最高18〜15℃ ／ 快適</span></div>
-        <div class="mo-b">菊花大会と秋バラの終盤が重なる。新そばが出始め、もみじも色づき始める。寒さを避けつつ秋を取るならここ。</div>
+        <div class="mo-b"><b>新そばが出始め、もみじが色づきはじめる。</b>紅葉は完成形ではないが、寒さを避けつつ両方に手が届く。菊花大会と秋バラの終盤も重なる。</div>
       </div>
-      <div class="mo">
+      <div class="mo peak">
         <div class="mo-h"><span class="mo-m">11月 下旬</span><span class="mo-t">最高14℃前後 ／ 朝は10℃以下</span></div>
-        <div class="mo-b">紅葉のピークと深大寺そばまつり。景色はいちばんだが、しっかり寒い。上着が要る。</div>
+        <div class="mo-b"><b>紅葉のピークと深大寺そばまつりが重なる、年に一度の週。</b>もみじと新そばが同時に揃うのはここだけ。そのぶん寒く、人も多い。上着は必須。</div>
       </div>
     </div>
   </section>

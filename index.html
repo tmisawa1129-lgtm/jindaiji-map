@@ -173,7 +173,7 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 }
 .bus-alert.solo{margin-top:26px}
 .bus[hidden],.bus-alert[hidden]{display:none}
-/* ---------- いつ行くか ---------- */
+/* ---------- 月ごとの見どころ ---------- */
 .months{margin-top:32px}
 .months[hidden]{display:none}
 .mo{padding:11px 0;border-top:1px dotted var(--line)}
@@ -182,13 +182,6 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .mo-m{font-family:var(--disp);font-size:15.5px;font-weight:700;color:var(--ai);letter-spacing:.06em}
 .mo-t{font-size:11px;color:var(--ink-3);letter-spacing:.03em}
 .mo-b{font-size:12.5px;color:var(--ink-2);line-height:1.7}
-.mo.best .mo-m,.mo.peak .mo-m{position:relative}
-.mo.best .mo-m::after,.mo.peak .mo-m::after{
-  margin-left:9px;padding:2px 7px;border-radius:2px;vertical-align:2px;
-  font-family:var(--body);font-size:9.5px;font-weight:700;letter-spacing:.08em;
-}
-.mo.best .mo-m::after{content:"おすすめ";background:var(--st-open-bg);color:var(--st-open-fg)}
-.mo.peak .mo-m::after{content:"本命";background:var(--shu);color:var(--on-accent)}
 .bus-card{
   background:var(--card);border:1px solid var(--line);
   border-radius:4px;padding:14px 16px;margin-bottom:10px;
@@ -228,27 +221,26 @@ footer b{color:var(--ink-2)}
 
   <section class="area months">
     <div class="area-head">
-      <h2>🍂 いつ行くか</h2>
-      <span class="area-sub">9月〜11月の見どころ</span>
+      <h2>🍂 9月〜11月の見どころ</h2>
     </div>
     <div class="area-rule"></div>
 
     <div class="bus-card">
       <div class="mo">
-        <div class="mo-h"><span class="mo-m">9月</span><span class="mo-t">最高28℃前後 ／ 残暑</span></div>
-        <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲き始める。残暑が続くので、かき氷がいちばんうまい時期でもある。</div>
+        <div class="mo-h"><span class="mo-m">9月</span><span class="mo-t">最高28℃前後 ／ 夏の名残</span></div>
+        <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲きはじめ、かき氷もまだおいしい。夏と秋が重なる時季。</div>
       </div>
       <div class="mo">
-        <div class="mo-h"><span class="mo-m">10月</span><span class="mo-t">最高22℃前後 ／ 歩きやすい</span></div>
-        <div class="mo-b">気候はこの時期がいちばん良く、秋のバラフェスタが開幕してダリアも本番。ただし<b>紅葉にも新そばにもまだ早い</b>。</div>
+        <div class="mo-h"><span class="mo-m">10月</span><span class="mo-t">最高22℃前後 ／ いちばん歩きやすい</span></div>
+        <div class="mo-b">秋のバラフェスタが開幕し、ダリアが本番を迎える。金木犀が香り、境内をゆっくり歩くのに向く。人出も落ち着いている。</div>
       </div>
-      <div class="mo best">
-        <div class="mo-h"><span class="mo-m">11月 上〜中旬</span><span class="mo-t">最高18〜15℃ ／ 快適</span></div>
-        <div class="mo-b"><b>新そばが出始め、もみじが色づきはじめる。</b>紅葉は完成形ではないが、寒さを避けつつ両方に手が届く。菊花大会と秋バラの終盤も重なる。</div>
+      <div class="mo">
+        <div class="mo-h"><span class="mo-m">11月 上〜中旬</span><span class="mo-t">最高18〜15℃ ／ 過ごしやすい</span></div>
+        <div class="mo-b"><b>新そばが出はじめ、もみじが色づきはじめる。</b>菊花大会と秋バラの終盤も重なり、園内はいちばん花の種類が多い頃。</div>
       </div>
-      <div class="mo peak">
-        <div class="mo-h"><span class="mo-m">11月 下旬</span><span class="mo-t">最高14℃前後 ／ 朝は10℃以下</span></div>
-        <div class="mo-b"><b>紅葉のピークと深大寺そばまつりが重なる、年に一度の週。</b>もみじと新そばが同時に揃うのはここだけ。そのぶん寒く、人も多い。上着は必須。</div>
+      <div class="mo">
+        <div class="mo-h"><span class="mo-m">11月 下旬</span><span class="mo-t">最高14℃前後 ／ 上着があると安心</span></div>
+        <div class="mo-b"><b>紅葉が盛りを迎え、深大寺そばまつりが重なる。</b>もみじと新そばを一度に楽しめる時季。茅葺きの山門と紅葉が並ぶ景色はこの頃だけ。</div>
       </div>
     </div>
   </section>

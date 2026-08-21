@@ -94,23 +94,29 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 .b-in{background:var(--ai)} .b-shade{background:var(--koke)}
 .b-water{background:var(--mizu)} .b-sun{background:var(--shu)}
 
-/* ---------- タブ：短冊 ---------- */
-.tabs{position:sticky;top:0;z-index:5;background:var(--ground);padding-bottom:18px;margin-top:22px}
-.tabs-row{display:flex;gap:10px;overflow-x:auto;scrollbar-width:none;padding-top:14px;border-top:1px solid var(--line)}
-.tabs-row::-webkit-scrollbar{display:none}
+/* ---------- 絞り込み：円のアイコン ---------- */
+.tabs{margin-top:30px;padding-top:22px;border-top:1px solid var(--line)}
+.tabs-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 8px}
 .tabs-row button{
-  position:relative;flex:none;cursor:pointer;
-  font-family:var(--disp);font-size:14.5px;font-weight:500;letter-spacing:.1em;white-space:nowrap;
-  padding:9px 15px 8px;border-radius:0 0 5px 5px;
-  border:1px solid var(--line);border-top:none;background:var(--card);color:var(--ink-2);
-  transition:background .18s,color .18s,border-color .18s,transform .18s;
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  padding:0;border:none;background:none;cursor:pointer;color:var(--ink-2);
 }
-.tabs-row button::before{content:"";position:absolute;left:50%;top:-14px;width:1px;height:14px;background:var(--line);transition:background .18s,height .18s}
-.tabs-row button:hover{transform:translateY(2px)}
-.tabs-row button[aria-pressed="true"]{background:var(--ai);border-color:var(--ai);color:var(--on-accent);transform:translateY(3px)}
-.tabs-row button[aria-pressed="true"]::before{background:var(--ai);height:17px}
-.tabs-row button:focus-visible{outline:2px solid var(--yusui);outline-offset:2px}
-.tab-n{font-family:var(--body);font-size:10px;font-weight:700;margin-left:8px;opacity:.55;font-variant-numeric:tabular-nums;letter-spacing:0}
+.tab-ico{
+  width:74px;height:74px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);background:var(--card);
+  transition:background .2s,border-color .2s,color .2s,transform .2s;
+}
+.tab-ico svg{
+  width:34px;height:34px;fill:none;stroke:currentColor;
+  stroke-width:1.35;stroke-linecap:round;stroke-linejoin:round;
+}
+.tabs-row button:hover .tab-ico{transform:translateY(-2px);border-color:var(--ink-3)}
+.tabs-row button[aria-pressed="true"] .tab-ico{background:var(--ai);border-color:var(--ai);color:var(--on-accent)}
+.tabs-row button:focus-visible .tab-ico{outline:2px solid var(--yusui);outline-offset:3px}
+.tab-l{font-family:var(--disp);font-size:13.5px;font-weight:500;letter-spacing:.09em;color:var(--ink)}
+.tabs-row button[aria-pressed="true"] .tab-l{color:var(--ai);font-weight:700}
+.tab-n{font-family:var(--body);font-size:10px;font-weight:700;margin-left:6px;opacity:.5;font-variant-numeric:tabular-nums;letter-spacing:0}
 
 /* ---------- 一覧 ---------- */
 .area{margin-top:30px}
@@ -458,6 +464,21 @@ const AREAS = [
   {id:"park",  name:"神代植物公園", sub:"バス停「神代植物公園前」下車"},
   {id:"chofu", name:"調布駅前・天神通り", sub:"京王線 調布駅 北口"}
 ];
+/* アイコンは画像ではなく線画のSVG。24x24 の座標で描く */
+const ICON = {
+  all:  '<circle cx="8" cy="8" r="2.7"/><circle cx="16" cy="8" r="2.7"/><circle cx="8" cy="16" r="2.7"/><circle cx="16" cy="16" r="2.7"/>',
+  /* 風鈴 */
+  natsu:'<path d="M7.8 12.4V11a4.2 4.2 0 0 1 8.4 0v1.4"/><path d="M6.9 12.4h10.2"/><path d="M12 6.8V4.2"/><path d="M12 13.6v2.6"/><path d="M10.3 16.2h3.4v3.6h-3.4z"/>',
+  /* 落ち葉 */
+  aki:  '<path d="M4.4 19.6C13 20.8 18.6 15.4 19.6 5.2 10.6 5.2 5.2 10.6 4.4 19.6z"/><path d="M4.4 19.6c3.2-3.4 6.8-5.6 10.4-6.8"/>',
+  /* せいろ */
+  soba: '<rect x="3.8" y="8.8" width="16.4" height="7.6" rx="1.4"/><path d="M3.8 11.8h16.4"/><path d="M6.8 14.3c1.3-1.1 2.6-1.1 3.9 0s2.6 1.1 3.9 0 2.6-1.1 3.6-.2"/>',
+  /* 串団子 */
+  dango:'<path d="M12 2.8v18.4"/><circle cx="12" cy="7.4" r="2.8"/><circle cx="12" cy="12.6" r="2.8"/><circle cx="12" cy="17.8" r="2.8"/>',
+  /* 山門 */
+  spot: '<path d="M3.4 20.4h17.2"/><path d="M6.6 20.4v-7.2M17.4 20.4v-7.2"/><path d="M2.8 13.2h18.4L12 6.6z"/><path d="M9.8 20.4v-4.2h4.4v4.2"/>'
+};
+
 const GENRES = [
   {id:"all",   label:"すべて"},
   {id:"natsu", label:"夏"},
@@ -487,10 +508,13 @@ const emptyEl = document.getElementById("empty");
 const rowEl   = document.getElementById("tabs-row");
 let current = "all";
 
-/* ---- タブ ---- */
+/* ---- 絞り込みのアイコン ---- */
 rowEl.innerHTML = GENRES.map(g => {
   const n = g.id === "all" ? SHOPS.length : SHOPS.filter(s => s.genres.includes(g.id)).length;
-  return `<button data-genre="${g.id}" aria-pressed="${g.id === "all"}">${g.label}<span class="tab-n">${n}</span></button>`;
+  return `<button data-genre="${g.id}" aria-pressed="${g.id === "all"}">`
+    + `<span class="tab-ico"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[g.id]}</svg></span>`
+    + `<span class="tab-l">${g.label}<span class="tab-n">${n}</span></span>`
+    + `</button>`;
 }).join("");
 
 

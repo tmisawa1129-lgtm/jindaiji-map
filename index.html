@@ -303,12 +303,6 @@ footer b{color:var(--ink-2)}
 <script>
 
 const SHOPS = [
-  /* ===== 夏のもの ===== */
-  {id:"hoozuki", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["natsu"], name:"ほおずきハッピーゲート", shade:"sun",
-   status:"check", statusText:"例年7月中旬〜8月中旬", hours:"深大寺 山門",
-   note:"提灯に見立てたほおずきを並べて精霊を迎える、深大寺の夏の設え。山門に例年7月13日頃から8月15日頃まで置かれる。同じ期間、夏の特別御朱印とお守りが授与される（なくなり次第終了）。鬼燈まつり本体は例年7月中旬の3日間。",
-   map:"https://maps.google.com/?cid=8224161598012187145"},
-
   /* ===== 秋のもの ===== */
   {id:"kouyou", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["aki","spot"], name:"境内の紅葉", shade:"shade",
    status:"check", statusText:"11月下旬〜12月上旬", hours:"深大寺 境内 ／ 終日",
@@ -322,19 +316,6 @@ const SHOPS = [
    status:"open", statusText:"通年・無料", hours:"境内西端 ／ 終日",
    note:"深大寺の名の由来である水神、深沙大王を祀る御堂。現在の建物は1968年の再建で、市の有形文化財。天井に龍の絵がある。まわりを湧水が流れ、本堂周辺より人が少ない。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+深沙大王堂"},
-
-  {id:"fuurin", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["natsu"], name:"朝顔と風鈴回廊", shade:"shade",
-   status:"check", statusText:"例年7月〜8月末", hours:"せせらぎの小路 ／ 入園500円",
-   note:"神代植物公園の夏の企画。木漏れ日の落ちる小路に風鈴の回廊が設けられ、正門と深大寺門には風鈴門と変化朝顔が並ぶ。朝顔は昼前に萎むので午前中に。",
-   map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"shinobu", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["natsu"], name:"つりしのぶと江戸風鈴の展示", shade:"in",
-   status:"check", statusText:"例年7月〜8月末", hours:"植物会館ホール ／ 入園500円",
-   note:"同じ企画の屋内展示。つりしのぶはシダを束ねて軒に吊るし、涼をとる江戸の職人仕事。つりしのぶ作りのワークショップが開かれる年もある。冷房が効いていて避難先になる。",
-   map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"stamp", area:"park", noFood:true, genres:["natsu"], name:"クールスポット スタンプラリー", shade:"shade",
-   status:"check", statusText:"例年7月〜8月", hours:"神代植物公園・深大寺 ／ 参加無料",
-   note:"神代植物公園と深大寺が共同で実施するデジタルスタンプラリー。園内と境内の涼しい場所をめぐる趣旨で、スマートフォンから参加できる。開催の有無は年によるので公式で確認を。",
-   map:"https://maps.google.com/?cid=9763061280357406539"},
   {id:"hagi", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki"], name:"はぎ園と秋の七草", shade:"shade",
    status:"check", statusText:"8月〜10月上旬", hours:"はぎ園 ／ 入園500円",
    note:"萩が10品種110株、8月から10月上旬にかけて咲き継ぐ。同じ一角にキキョウやオミナエシなど秋の七草が植えられている。残暑のうちから秋がはじまっている場所。",
@@ -455,8 +436,6 @@ const AREAS = [
 /* アイコンは画像ではなく線画のSVG。24x24 の座標で描く */
 const ICON = {
   all:  '<circle cx="8" cy="8" r="2.7"/><circle cx="16" cy="8" r="2.7"/><circle cx="8" cy="16" r="2.7"/><circle cx="16" cy="16" r="2.7"/>',
-  /* 風鈴 */
-  natsu:'<path d="M7.8 12.4V11a4.2 4.2 0 0 1 8.4 0v1.4"/><path d="M6.9 12.4h10.2"/><path d="M12 6.8V4.2"/><path d="M12 13.6v2.6"/><path d="M10.3 16.2h3.4v3.6h-3.4z"/>',
   /* 落ち葉 */
   aki:  '<path d="M4.4 19.6C13 20.8 18.6 15.4 19.6 5.2 10.6 5.2 5.2 10.6 4.4 19.6z"/><path d="M4.4 19.6c3.2-3.4 6.8-5.6 10.4-6.8"/>',
   /* せいろ */
@@ -469,7 +448,6 @@ const ICON = {
 
 const GENRES = [
   {id:"all",   label:"すべて"},
-  {id:"natsu", label:"夏"},
   {id:"aki",   label:"秋"},
   {id:"soba",  label:"蕎麦"},
   {id:"dango", label:"茶菓"},

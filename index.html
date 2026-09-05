@@ -56,6 +56,14 @@ a{color:inherit}
 @media (min-width:480px){.hero-photo{height:300px}}
 .photo-credit{padding-top:8px;font-size:10px;color:var(--ink-3);letter-spacing:.01em;text-align:right}
 .photo-credit a{color:inherit;text-decoration:underline}
+.mood{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
+.mood-item{position:relative;border-radius:var(--radius-m);overflow:hidden;aspect-ratio:4/3}
+.mood-item img{width:100%;height:100%;object-fit:cover;display:block}
+.mood-item span{
+  position:absolute;left:0;bottom:0;right:0;padding:16px 9px 6px;
+  font-size:10.5px;color:#fff;letter-spacing:.02em;
+  background:linear-gradient(to top,rgba(0,0,0,.55),transparent);
+}
 .hero{padding:24px 0 0}
 .hero-eyebrow{font-size:11px;letter-spacing:.14em;color:var(--ai);font-weight:700;margin-bottom:14px}
 .hero h1{font-family:var(--disp);font-weight:700;font-size:clamp(32px,9vw,52px);line-height:1.16;letter-spacing:.02em;white-space:nowrap}
@@ -205,6 +213,18 @@ footer b{color:var(--ink-2)}
 <img class="hero-photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Jindai-ji_in_Chofu,_Tokyo_002.jpg?width=1000" alt="深大寺 本堂" loading="eager" decoding="async">
 <div class="wrap">
   <p class="photo-credit">写真：<a href="https://commons.wikimedia.org/wiki/File:Jindai-ji_in_Chofu,_Tokyo_002.jpg" target="_blank" rel="noopener">掬茶</a>（<a href="https://creativecommons.org/licenses/by-sa/3.0/deed.ja" target="_blank" rel="noopener">CC BY-SA 3.0</a>）</p>
+
+  <div class="mood">
+    <div class="mood-item">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Zaru-Soba-1.jpg?width=500" alt="ざるそば（イメージ）" loading="lazy">
+      <span>そば（イメージ）</span>
+    </div>
+    <div class="mood-item">
+      <img src="https://commons.wikimedia.org/wiki/Special:FilePath/Autumn_foliage_2012_(8252565415).jpg?width=500" alt="紅葉（イメージ、京都で撮影）" loading="lazy">
+      <span>紅葉（イメージ）</span>
+    </div>
+  </div>
+  <p class="photo-credit">上2枚は深大寺での撮影ではなく一般的な写真。そば：Evelyn-rose（CC0）／ 紅葉：<a href="https://www.flickr.com/photos/mrhayata/8252565415" target="_blank" rel="noopener">mrhayata</a>（<a href="https://creativecommons.org/licenses/by/2.0/deed.ja" target="_blank" rel="noopener">CC BY 2.0</a>、京都で撮影）</p>
 
   <header class="hero">
     <div class="hero-eyebrow">調布市 深大寺・神代植物公園</div>

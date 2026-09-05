@@ -226,15 +226,19 @@ footer b{color:var(--ink-2)}
         <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲きはじめ、かき氷もまだおいしい。夏と秋が重なる時季。</div>
       </div>
       <div class="mo">
-        <div class="mo-h"><span class="mo-m">10月</span><span class="mo-t">最高22℃前後 ／ いちばん歩きやすい</span></div>
-        <div class="mo-b">秋のバラフェスタが開幕し、ダリアが本番を迎える。金木犀が香り、境内をゆっくり歩くのに向く。人出も落ち着いている。</div>
+        <div class="mo-h"><span class="mo-m">10月 上旬〜中旬</span><span class="mo-t">最高25℃前後 ／ 汗ばむ日もある</span></div>
+        <div class="mo-b">秋のバラフェスタが開幕する。金木犀が香りはじめ、萩やダリアもまだ見られる。日中は半袖でも歩ける陽気が残る。</div>
       </div>
       <div class="mo">
-        <div class="mo-h"><span class="mo-m">11月 上〜中旬</span><span class="mo-t">最高18〜15℃ ／ 過ごしやすい</span></div>
+        <div class="mo-h"><span class="mo-m">10月 中旬〜下旬</span><span class="mo-t">最高20℃前後 ／ 空気が澄む</span></div>
+        <div class="mo-b">ダリアが本番を迎え、秋晴れの日が増える。人出も落ち着いていて、一年でいちばん歩きやすい時季。</div>
+      </div>
+      <div class="mo">
+        <div class="mo-h"><span class="mo-m">11月 上旬〜中旬</span><span class="mo-t">最高18〜15℃ ／ 過ごしやすい</span></div>
         <div class="mo-b"><b>新そばが出はじめ、もみじが色づきはじめる。</b>菊花大会と秋バラの終盤も重なり、園内はいちばん花の種類が多い頃。</div>
       </div>
       <div class="mo">
-        <div class="mo-h"><span class="mo-m">11月 下旬</span><span class="mo-t">最高14℃前後 ／ 上着があると安心</span></div>
+        <div class="mo-h"><span class="mo-m">11月 中旬〜下旬</span><span class="mo-t">最高14℃前後 ／ 上着があると安心</span></div>
         <div class="mo-b"><b>紅葉が盛りを迎え、深大寺そばまつりが重なる。</b>もみじと新そばを一度に楽しめる時季。茅葺きの山門と紅葉が並ぶ景色はこの頃だけ。</div>
       </div>
     </div>
@@ -299,7 +303,7 @@ footer b{color:var(--ink-2)}
 
 const SHOPS = [
   /* ===== 秋のもの ===== */
-  {id:"kouyou", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["aki","spot"], name:"境内の紅葉", shade:"shade",
+  {id:"kouyou", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["aki","jisha"], name:"境内の紅葉", shade:"shade",
    status:"check", statusText:"11月下旬〜12月上旬", hours:"深大寺 境内 ／ 終日",
    note:"本堂裏手から深沙堂へ抜ける斜面と、山門まわりのもみじが色づく。例年の見頃は11月下旬から12月上旬。茅葺きの山門と紅葉が重なる一角が写真に向く。朝のうちは人が少ない。",
    map:"https://maps.google.com/?cid=8224161598012187145"},
@@ -307,7 +311,7 @@ const SHOPS = [
    status:"check", statusText:"例年11月下旬", hours:"深大寺 境内・参道",
    note:"新そばの時季に合わせて例年11月下旬から12月上旬に開かれる。期間中は境内でそば守観音の供養祭があり、献上したそばが振る舞われる回もある。日程は年ごとに動くので深大寺の公式で確認を。",
    map:"https://maps.google.com/?cid=8224161598012187145"},
-  {id:"jinja", area:"sando", panel:"a", noFood:true, genres:["spot"], name:"深沙堂", shade:"water",
+  {id:"jinja", area:"sando", panel:"a", noFood:true, genres:["jisha"], name:"深沙堂", shade:"water",
    status:"open", statusText:"通年・無料", hours:"境内西端 ／ 終日",
    note:"深大寺の名の由来である水神、深沙大王を祀る御堂。現在の建物は1968年の再建で、市の有形文化財。天井に龍の絵がある。まわりを湧水が流れ、本堂周辺より人が少ない。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+深沙大王堂"},
@@ -327,11 +331,11 @@ const SHOPS = [
    status:"check", statusText:"例年11月上旬〜中旬", hours:"園内 ／ 入園500円",
    note:"大菊の三本仕立てや懸崖、盆栽菊などが並ぶ品評会。丹精した鉢が一堂に集まる。猛暑の年は開花が遅れることがある。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"kaede", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki","spot"], name:"かえで園の紅葉", shade:"shade",
+  {id:"kaede", area:"park", panel:"a", noFood:true, pinWith:"jindaipark", genres:["aki","teien"], name:"かえで園の紅葉", shade:"shade",
    status:"check", statusText:"11月下旬〜12月上旬", hours:"園内 ／ 入園500円",
    note:"かえで園に約60種のもみじが植わり、種類ごとに色づく時期がずれるので見頃が長い。つつじ園のケヤキの大木も同じ頃に赤や橙に染まる。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"tenjin", area:"chofu", panel:"b", noFood:true, genres:["spot"], name:"天神通り商店街", shade:"sun",
+  {id:"tenjin", area:"chofu", panel:"b", noFood:true, genres:["jisha"], name:"天神通り商店街", shade:"sun",
    status:"open", statusText:"通年・無料", hours:"調布駅 北口すぐ",
    note:"調布駅から布多天神社へ続く商店街。水木しげるが調布に住んでいた縁で、鬼太郎たちの像が通りに点在し、鬼太郎通りとも呼ばれる。鬼太郎茶屋もこの通りにある。",
    map:"https://www.google.com/maps/search/?api=1&query=調布+天神通り商店街"},
@@ -381,21 +385,21 @@ const SHOPS = [
    status:"check", rating:"4.8 / 12件", hours:"不定期（旗が出ていれば営業）",
    note:"湧水の向かい。挽きたてのそば粉を使った焼き菓子を手作りで少量ずつ出す。ガレットやマドレーヌなど洋菓子寄り。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+玉泉堂"},
-  {id:"jindaiji", area:"sando", panel:"a", noFood:true, genres:["spot"], name:"深大寺", shade:"in",
+  {id:"jindaiji", area:"sando", panel:"a", noFood:true, genres:["jisha"], name:"深大寺", shade:"in",
    status:"open", rating:"4.3 / 8,540件", hours:"毎日 6:00–17:00",
    note:"国宝の釈迦如来倚像は釈迦堂で拝観300円。元三大師堂では日に数回の護摩祈願がある。御朱印は当面すべて書き置きの紙朱印で、朱印帳への直書きはしていない。",
    map:"https://maps.google.com/?cid=8224161598012187145"},
 
   /* ===== 神代植物公園 ===== */
-  {id:"jindaipark", area:"park", panel:"a", noFood:true, genres:["spot"], name:"神代植物公園", shade:"shade",
+  {id:"jindaipark", area:"park", panel:"a", noFood:true, genres:["teien"], name:"神代植物公園", shade:"shade",
    status:"open", rating:"4.3 / 6,486件", hours:"9:30–17:00（最終入園16:00・月休）／ 500円",
    note:"武蔵野の雑木林が残る都立の植物公園。ばら園は約400種5,200株で、秋バラは10月から11月中旬。かえで園の紅葉は11月下旬から。大温室は熱帯植物を集めた屋内施設で、冷えた日の避難先になる。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"suisei", area:"park", panel:"a", noFood:true, genres:["spot"], name:"水生植物園", shade:"water",
+  {id:"suisei", area:"park", panel:"a", noFood:true, genres:["teien"], name:"水生植物園", shade:"water",
    status:"open", rating:"4.1 / 176件", hours:"9:30–16:30（月休）／ 無料",
    note:"深大寺から東へ徒歩5分の湿地に木道が渡されている。湧水と深大寺城跡があり、神代植物公園の一部だが入園は無料。",
    map:"https://maps.google.com/?cid=5473221735308242460"},
-  {id:"greensalon", area:"park", panel:"a", genres:["spot"], name:"グリーンサロン", shade:"in",
+  {id:"greensalon", area:"park", panel:"a", genres:["teien"], name:"グリーンサロン", shade:"in",
    status:"open", rating:"3.8 / 33件", hours:"9:30–17:00（月休）",
    note:"神代植物公園の園内カフェ。深大寺養蜂園のはちみつを使ったカレーが名物。屋内席とテラス席があり、先に注文して席で待つ方式。",
    map:"https://maps.google.com/?cid=15233203860007683140"},
@@ -438,7 +442,9 @@ const ICON = {
   /* 串団子 */
   dango:'<path d="M12 2.8v18.4"/><circle cx="12" cy="7.4" r="2.8"/><circle cx="12" cy="12.6" r="2.8"/><circle cx="12" cy="17.8" r="2.8"/>',
   /* 山門 */
-  spot: '<path d="M3.4 20.4h17.2"/><path d="M6.6 20.4v-7.2M17.4 20.4v-7.2"/><path d="M2.8 13.2h18.4L12 6.6z"/><path d="M9.8 20.4v-4.2h4.4v4.2"/>'
+  jisha:'<path d="M3.4 20.4h17.2"/><path d="M6.6 20.4v-7.2M17.4 20.4v-7.2"/><path d="M2.8 13.2h18.4L12 6.6z"/><path d="M9.8 20.4v-4.2h4.4v4.2"/>',
+  /* 木立 */
+  teien:'<circle cx="12" cy="10" r="6.3"/><path d="M12 16.3v4.7"/><path d="M9 21h6"/>'
 };
 
 const GENRES = [
@@ -446,7 +452,8 @@ const GENRES = [
   {id:"aki",   label:"秋"},
   {id:"soba",  label:"蕎麦"},
   {id:"dango", label:"茶菓"},
-  {id:"spot",  label:"見所"}
+  {id:"jisha", label:"寺社"},
+  {id:"teien", label:"植物園"}
 ];
 const SHADE_LABEL = {in:"屋内", shade:"外席あり", water:"水辺", sun:"日当たり"};
 const STATUS = {

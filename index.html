@@ -54,7 +54,7 @@
   }
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-anchor:none}
 body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.7;padding-bottom:calc(92px + env(safe-area-inset-bottom))}
 .wrap{max-width:680px;margin:0 auto;padding:0 18px}
 a{color:inherit}
@@ -554,6 +554,18 @@ rowEl.addEventListener("click", e => {
   current = btn.dataset.genre;
   rowEl.querySelectorAll("button").forEach(b => b.setAttribute("aria-pressed", String(b === btn)));
   render();
+
+  /* 一覧の「先頭」が画面内にないなら、そこまで運ぶ。
+     件数が減って文書が短くなるとブラウザが先にスクロール位置を
+     末尾側へ詰めてしまうことがあるため、末尾が見えているだけでは
+     「見えている」とみなさない。 */
+  const barH = document.querySelector(".tabs").getBoundingClientRect().height;
+  const listTop = listEl.getBoundingClientRect().top;
+  const topVisible = listTop > -40 && listTop < window.innerHeight - barH - 40;
+  if(!topVisible){
+    const y = listEl.getBoundingClientRect().top + window.scrollY - 14;
+    window.scrollTo({top: y, behavior: "instant"});
+  }
 });
 
 

@@ -1,0 +1,15 @@
+{
+  "name": "深大寺MAP",
+  "short_name": "深大寺MAP",
+  "description": "深大寺と神代植物公園まわりの蕎麦・茶菓・秋の見どころをまとめた地図",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F0E7",
+  "theme_color": "#7A3B2E",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

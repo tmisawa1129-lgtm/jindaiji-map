@@ -144,9 +144,23 @@ a{color:inherit}
 
 .card{
   position:relative;background:var(--card);border:1px solid var(--line);
-  border-radius:var(--radius-m);padding:18px 19px 17px;margin-bottom:12px;
-  display:flex;flex-direction:column;gap:9px;scroll-margin-top:88px;
+  border-radius:var(--radius-m);margin-bottom:12px;
+  scroll-margin-top:88px;overflow:hidden;
 }
+.card summary{
+  position:relative;display:flex;flex-direction:column;gap:9px;
+  padding:18px 42px 17px 19px;cursor:pointer;list-style:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.card summary::-webkit-details-marker{display:none}
+.card-chev{
+  position:absolute;top:21px;right:17px;width:18px;height:18px;
+  fill:none;stroke:var(--ink-3);stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;
+  transition:transform .15s;
+}
+.card details[open] .card-chev{transform:rotate(180deg)}
+.card-body{display:flex;flex-direction:column;gap:9px;padding:0 19px 18px;border-top:1px solid var(--line);margin-top:2px;padding-top:14px}
 
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
 .card-name{font-family:var(--disp);font-size:18px;font-weight:700;letter-spacing:.01em;line-height:1.35}
@@ -188,12 +202,25 @@ a{color:inherit}
 /* ---------- 月ごとの見どころ ---------- */
 .months{margin-top:32px}
 .months[hidden]{display:none}
-.mo{padding:12px 0;border-top:1px solid var(--line)}
-.mo:first-child{border-top:none;padding-top:2px}
-.mo-h{display:flex;align-items:baseline;gap:11px;margin-bottom:4px}
+.mo{border-top:1px solid var(--line)}
+.mo:first-child{border-top:none}
+.mo-h{
+  position:relative;display:flex;align-items:baseline;gap:11px;
+  padding:12px 30px 12px 0;cursor:pointer;list-style:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.mo:first-child .mo-h{padding-top:2px}
+.mo-h::-webkit-details-marker{display:none}
 .mo-m{font-size:14.5px;font-weight:700;color:var(--ai);letter-spacing:.01em}
 .mo-t{font-size:11px;color:var(--ink-3);letter-spacing:.01em}
-.mo-b{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+.mo-chev{
+  position:absolute;top:14px;right:0;width:16px;height:16px;
+  fill:none;stroke:var(--ink-3);stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round;transition:transform .15s;
+}
+.mo:first-child .mo-chev{top:4px}
+.mo[open] .mo-chev{transform:rotate(180deg)}
+.mo-b{font-size:12.5px;color:var(--ink-2);line-height:1.7;padding-bottom:14px}
 .bus-card{
   background:var(--card);border:1px solid var(--line);
   border-radius:var(--radius-m);padding:16px 17px;margin-bottom:11px;
@@ -237,27 +264,27 @@ footer b{color:var(--ink-2)}
     </div>
     <div class="area-rule"></div>
 
-    <div class="bus-card">
-      <div class="mo">
-        <div class="mo-h"><span class="mo-m">9月</span><span class="mo-t">最高28℃前後 ／ 夏の名残</span></div>
+    <div class="bus-card" id="months-list">
+      <details class="mo" data-from="09-01" data-to="09-30">
+        <summary class="mo-h"><span class="mo-m">9月</span><span class="mo-t">最高28℃前後 ／ 夏の名残</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲きはじめ、かき氷もまだおいしい。夏と秋が重なる時季。</div>
-      </div>
-      <div class="mo">
-        <div class="mo-h"><span class="mo-m">10月 上旬〜中旬</span><span class="mo-t">最高25℃前後 ／ 汗ばむ日もある</span></div>
+      </details>
+      <details class="mo" data-from="10-01" data-to="10-15">
+        <summary class="mo-h"><span class="mo-m">10月 上旬〜中旬</span><span class="mo-t">最高25℃前後 ／ 汗ばむ日もある</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="mo-b">秋のバラフェスタが開幕する。金木犀が香りはじめ、萩やダリアもまだ見られる。日中は半袖でも歩ける陽気が残る。</div>
-      </div>
-      <div class="mo">
-        <div class="mo-h"><span class="mo-m">10月 中旬〜下旬</span><span class="mo-t">最高20℃前後 ／ 空気が澄む</span></div>
+      </details>
+      <details class="mo" data-from="10-16" data-to="10-31">
+        <summary class="mo-h"><span class="mo-m">10月 中旬〜下旬</span><span class="mo-t">最高20℃前後 ／ 空気が澄む</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="mo-b">ダリアが本番を迎え、秋晴れの日が増える。人出も落ち着いていて、一年でいちばん歩きやすい時季。</div>
-      </div>
-      <div class="mo">
-        <div class="mo-h"><span class="mo-m">11月 上旬〜中旬</span><span class="mo-t">最高18〜15℃ ／ 過ごしやすい</span></div>
+      </details>
+      <details class="mo" data-from="11-01" data-to="11-15">
+        <summary class="mo-h"><span class="mo-m">11月 上旬〜中旬</span><span class="mo-t">最高18〜15℃ ／ 過ごしやすい</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="mo-b"><b>新そばが出はじめ、もみじが色づきはじめる。</b>菊花大会と秋バラの終盤も重なり、園内はいちばん花の種類が多い頃。</div>
-      </div>
-      <div class="mo">
-        <div class="mo-h"><span class="mo-m">11月 中旬〜下旬</span><span class="mo-t">最高14℃前後 ／ 上着があると安心</span></div>
+      </details>
+      <details class="mo" data-from="11-16" data-to="11-30">
+        <summary class="mo-h"><span class="mo-m">11月 中旬〜下旬</span><span class="mo-t">最高14℃前後 ／ 上着があると安心</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="mo-b"><b>紅葉が盛りを迎え、深大寺そばまつりが重なる。</b>もみじと新そばを一度に楽しめる時季。茅葺きの山門と紅葉が並ぶ景色はこの頃だけ。</div>
-      </div>
+      </details>
     </div>
   </section>
 
@@ -515,17 +542,24 @@ function cardHtml(s){
   const rating = s.rating ? `<span class="card-rating">${s.rating}</span>` : "";
   return `
     <article class="card" data-id="${s.id}" id="c-${s.id}">
-      <div class="card-top">
-        <h3 class="card-name">${s.name}</h3>
-        ${rating}
-      </div>
-      <span class="status ${st.cls}">${label} <small><i class="dot dot-${s.shade}"></i>${SHADE_LABEL[s.shade]}</small></span>
-      <p class="card-note">${s.note}</p>
-      <p class="hours">${linkTel(s.hours)}${s.pinWith ? "　／　" + BY_ID[s.pinWith].name + " と同じ場所" : ""}</p>
-      <div class="links">
-        <a href="${s.map}" target="_blank" rel="noopener">Googleマップ</a>
-        ${tabelog}
-      </div>
+      <details>
+        <summary>
+          <span class="card-top">
+            <h3 class="card-name">${s.name}</h3>
+            ${rating}
+          </span>
+          <span class="status ${st.cls}">${label} <small><i class="dot dot-${s.shade}"></i>${SHADE_LABEL[s.shade]}</small></span>
+          <svg class="card-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="card-body">
+          <p class="card-note">${s.note}</p>
+          <p class="hours">${linkTel(s.hours)}${s.pinWith ? "　／　" + BY_ID[s.pinWith].name + " と同じ場所" : ""}</p>
+          <div class="links">
+            <a href="${s.map}" target="_blank" rel="noopener">Googleマップ</a>
+            ${tabelog}
+          </div>
+        </div>
+      </details>
     </article>`;
 }
 
@@ -571,6 +605,14 @@ rowEl.addEventListener("click", e => {
 
 
 render();
+
+/* 「9月〜11月の見どころ」は今日にあたる期間だけ開いておく */
+(() => {
+  const items = document.querySelectorAll("#months-list .mo");
+  const md = new Date().toLocaleDateString("sv-SE", {timeZone:"Asia/Tokyo"}).slice(5); // "MM-DD"
+  const hit = Array.from(items).find(d => md >= d.dataset.from && md <= d.dataset.to);
+  (hit || items[0]).open = true;
+})();
 
 
 /* ── 天気（Open-Meteo・深大寺） ─────────────── */

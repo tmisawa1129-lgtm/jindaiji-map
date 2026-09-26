@@ -60,8 +60,10 @@ body{background:var(--ground);color:var(--ink);font-family:var(--body);font-size
 a{color:inherit}
 :focus-visible{outline:2px solid var(--ai);outline-offset:2px}
 
-.hero-photo{display:block;width:100%;height:220px;object-fit:cover;object-position:center 58%;border-bottom:1px solid var(--line)}
-@media (min-width:480px){.hero-photo{height:300px}}
+.hero-photo-wrap{position:relative;border-bottom:1px solid var(--line)}
+.hero-photo-wrap::after{content:"";position:absolute;left:0;right:0;top:0;height:calc(env(safe-area-inset-top) + 36px);background:linear-gradient(rgba(0,0,0,.42),rgba(0,0,0,0));pointer-events:none}
+.hero-photo{display:block;width:100%;height:calc(220px + env(safe-area-inset-top));object-fit:cover;object-position:center 58%}
+@media (min-width:480px){.hero-photo{height:calc(300px + env(safe-area-inset-top))}}
 .photo-credit{padding-top:8px;font-size:10px;color:var(--ink-3);letter-spacing:.01em;text-align:right}
 .photo-credit a{color:inherit;text-decoration:underline}
 .hero{padding:24px 0 0}
@@ -183,7 +185,7 @@ a{color:inherit}
 .links{display:flex;gap:8px;margin-top:2px}
 .links a,.links button{
   flex:1;text-align:center;text-decoration:none;cursor:pointer;
-  font-family:var(--body);font-size:12.5px;font-weight:500;padding:9px 6px;border-radius:var(--radius-s);
+  font-family:var(--body);font-size:12.5px;font-weight:500;min-height:44px;display:flex;align-items:center;justify-content:center;padding:6px;border-radius:var(--radius-s);
   border:1px solid var(--line);background:transparent;color:var(--ink-2);
   transition:background .15s,color .15s,border-color .15s;
 }
@@ -242,7 +244,7 @@ footer b{color:var(--ink-2)}
 </style>
 </head>
 <body>
-<img class="hero-photo" src="https://commons.wikimedia.org/wiki/Special:FilePath/Jindai-ji_in_Chofu,_Tokyo_002.jpg?width=1000" alt="深大寺 本堂" loading="eager" decoding="async">
+<div class="hero-photo-wrap"><img class="hero-photo" src="hero.jpg" width="1000" height="750" alt="深大寺 本堂" loading="eager" decoding="async"></div>
 <div class="wrap">
   <p class="photo-credit">写真：<a href="https://commons.wikimedia.org/wiki/File:Jindai-ji_in_Chofu,_Tokyo_002.jpg" target="_blank" rel="noopener">掬茶</a>（<a href="https://creativecommons.org/licenses/by-sa/3.0/deed.ja" target="_blank" rel="noopener">CC BY-SA 3.0</a>）</p>
 
@@ -640,12 +642,12 @@ function dayParts(iso){
   return {md:`${d.getMonth()+1}/${d.getDate()}`, w:"日月火水木金土"[d.getDay()], dow:d.getDay()};
 }
 
-async function loadWeather(){
-  try{
-    const res = await fetch(WX_URL, {cache:"no-store"});
-    if(!res.ok) throw new Error("HTTP " + res.status);
-    const d = await res.json();
+const WX_KEY = "jindaiji-wx";
+function saveWx(d){ try{ localStorage.setItem(WX_KEY, JSON.stringify({t:Date.now(), d})); }catch(_){} }
+function readWx(){ try{ return JSON.parse(localStorage.getItem(WX_KEY)); }catch(_){ return null; } }
 
+/* stale=true は圏外のとき。前回取得した予報を「前回分」と明示して出す */
+function renderWeather(d, stale, savedAt){
     wxEl.innerHTML = d.daily.time.map((iso, i) => {
       const [icon, label] = WX_CODE[d.daily.weather_code[i]] || ["🌡️","—"];
       const hi  = Math.round(d.daily.temperature_2m_max[i]);
@@ -662,7 +664,11 @@ async function loadWeather(){
     }).join("");
 
     /* 上の枠は「その日の代表」なので、いまの空とはズレる。実況を別に出す */
-    if(d.current){
+    if(stale){
+      const t = new Date(savedAt);
+      liveEl.innerHTML = `<span class="wx-live-note">電波が弱いため、${t.getMonth()+1}/${t.getDate()} ${String(t.getHours()).padStart(2,"0")}:${String(t.getMinutes()).padStart(2,"0")} 取得分を表示しています。</span>`;
+      liveEl.hidden = false;
+    }else if(d.current){
       const [nowIcon, nowLabel] = WX_CODE[d.current.weather_code] || ["🌡️","—"];
       liveEl.innerHTML = `<span>いま ${d.current.time.slice(11,16)}</span>`
         + `<span class="wx-live-t">${nowIcon} ${nowLabel}</span>`
@@ -670,11 +676,27 @@ async function loadWeather(){
         + `<span class="wx-live-note">上の枠は一日の目安。降水確率はその日の最大値で、朝から降るという意味ではない。</span>`;
       liveEl.hidden = false;
     }
+}
+
+async function loadWeather(){
+  try{
+    const res = await fetch(WX_URL, {cache:"no-store"});
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    const d = await res.json();
+    saveWx(d);
+    renderWeather(d, false);
   }catch(err){
-    wxEl.innerHTML = `<span class="wx-note">天気を取得できませんでした</span>`;
+    const saved = readWx();
+    if(saved && saved.d) renderWeather(saved.d, true, saved.t);
+    else wxEl.innerHTML = `<span class="wx-note">天気を取得できませんでした</span>`;
   }
 }
 loadWeather();
+
+/* 圏外でも開けるように、ページと写真を端末へ保存する（sw.js） */
+if("serviceWorker" in navigator){
+  window.addEventListener("load", () => { navigator.serviceWorker.register("sw.js").catch(() => {}); });
+}
 
 </script>
 </body>

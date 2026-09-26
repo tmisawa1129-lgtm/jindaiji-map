@@ -201,6 +201,32 @@ a{color:inherit}
 }
 .bus-alert.solo{margin-top:28px}
 .bus[hidden],.bus-alert[hidden]{display:none}
+/* ---------- 地図 ---------- */
+.mapbox{margin-top:24px;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-m);overflow:hidden}
+.mapbox>summary{position:relative;display:flex;align-items:baseline;gap:11px;padding:16px 42px 16px 19px;cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+.mapbox>summary::-webkit-details-marker{display:none}
+.mapbox-t{font-family:var(--disp);font-size:16px;font-weight:700}
+.mapbox-s{font-size:11px;color:var(--ink-3);letter-spacing:.01em}
+.mapbox>summary .mo-chev{top:22px;right:17px}
+.mapbox[open]>summary .mo-chev{transform:rotate(180deg)}
+.map-body{border-top:1px solid var(--line)}
+.map-tools{display:flex;gap:8px;padding:12px 14px}
+.map-tools button{flex:1;min-height:44px;font-family:var(--body);font-size:12.5px;font-weight:500;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:var(--radius-s);cursor:pointer}
+.map-tools button[aria-pressed="true"]{background:var(--ai);border-color:var(--ai);color:var(--on-accent)}
+#map{height:min(62vh,440px);min-height:300px;background:var(--ground)}
+.map-note{padding:10px 14px 12px;font-size:11px;color:var(--ink-3);line-height:1.7}
+.leaflet-container{font-family:var(--body);-webkit-tap-highlight-color:transparent}
+.leaflet-popup-content-wrapper{background:var(--card);color:var(--ink);border-radius:var(--radius-m)}
+.leaflet-popup-tip{background:var(--card)}
+.leaflet-popup-content{margin:12px 14px}
+.pop-t{font-family:var(--disp);font-size:15px;font-weight:700;margin-bottom:6px}
+.pop-b{display:block;width:100%;min-height:40px;margin-top:6px;padding:6px 10px;font-family:var(--body);font-size:12.5px;font-weight:500;color:var(--ink-2);background:transparent;border:1px solid var(--line);border-radius:var(--radius-s);cursor:pointer;text-align:center;text-decoration:none;line-height:1.5}
+.pop-b.main{background:var(--ai);border-color:var(--ai);color:var(--on-accent)}
+.pin-wrap{background:none;border:none}
+.pin{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;border:2px solid #fff;box-shadow:0 1px 5px rgba(0,0,0,.4)}
+.pin svg{width:16px;height:16px;fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pin-soba{background:#7A3B2E}.pin-dango{background:#B23B1E}.pin-jisha{background:#3E7480}.pin-teien{background:#5C6B3E}.pin-aki{background:#B23B1E}
+@media (prefers-color-scheme:dark){.leaflet-tile-pane{filter:brightness(.78) contrast(1.05)}}
 /* ---------- 月ごとの見どころ ---------- */
 .months{margin-top:32px}
 .months[hidden]{display:none}
@@ -286,6 +312,19 @@ footer b{color:var(--ink-2)}
     </div>
   </section>
 
+  <details class="mapbox" id="mapbox">
+    <summary><span class="mapbox-t">🗺 地図で見る</span><span class="mapbox-s">下の絞り込みと連動</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
+    <div class="map-body">
+      <div class="map-tools">
+        <button type="button" data-map="sando" aria-pressed="true">深大寺・植物園</button>
+        <button type="button" data-map="chofu" aria-pressed="false">調布駅前</button>
+        <button type="button" id="map-me">📍 現在地</button>
+      </div>
+      <div id="map" role="application" aria-label="店と見どころの地図"></div>
+      <p class="map-note" id="map-note">ピンをタップすると詳細へ移れます。電波が弱いと地図の下地は出ませんが、ピンは表示されます（一度見た範囲は端末に保存されます）。</p>
+    </div>
+  </details>
+
   <div class="legend">
     <span class="legend-item"><i class="chip-band b-in"></i>屋内</span>
     <span class="legend-item"><i class="chip-band b-shade"></i>外席あり</span>
@@ -353,7 +392,7 @@ const SHOPS = [
    status:"check", statusText:"例年11月下旬", hours:"深大寺 境内・参道",
    note:"新そばの時季に合わせて例年11月下旬から12月上旬に開かれる。期間中は境内でそば守観音の供養祭があり、献上したそばが振る舞われる回もある。日程は年ごとに動くので深大寺の公式で確認を。",
    map:"https://maps.google.com/?cid=8224161598012187145"},
-  {id:"jinja", area:"sando", panel:"a", noFood:true, genres:["jisha"], name:"深沙堂", shade:"water",
+  {id:"jinja", ll:[35.667838,139.548647], area:"sando", panel:"a", noFood:true, genres:["jisha"], name:"深沙堂", shade:"water",
    status:"open", statusText:"通年・無料", hours:"境内西端 ／ 終日",
    note:"深大寺の名の由来である水神、深沙大王を祀る御堂。現在の建物は1968年の再建で、市の有形文化財。天井に龍の絵がある。まわりを湧水が流れ、本堂周辺より人が少ない。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+深沙大王堂"},
@@ -377,93 +416,93 @@ const SHOPS = [
    status:"check", statusText:"11月下旬〜12月上旬", hours:"園内 ／ 入園500円",
    note:"かえで園に約60種のもみじが植わり、種類ごとに色づく時期がずれるので見頃が長い。つつじ園のケヤキの大木も同じ頃に赤や橙に染まる。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"tenjin", area:"chofu", panel:"b", noFood:true, genres:["jisha"], name:"天神通り商店街", shade:"sun",
+  {id:"tenjin", ll:[35.654878,139.545025], area:"chofu", panel:"b", noFood:true, genres:["jisha"], name:"天神通り商店街", shade:"sun",
    status:"open", statusText:"通年・無料", hours:"調布駅 北口すぐ",
    note:"調布駅から布多天神社へ続く商店街。水木しげるが調布に住んでいた縁で、鬼太郎たちの像が通りに点在し、鬼太郎通りとも呼ばれる。鬼太郎茶屋もこの通りにある。",
    map:"https://www.google.com/maps/search/?api=1&query=調布+天神通り商店街"},
 
   /* ===== 深大寺・参道 ===== */
-  {id:"tamanoya", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13055725/", panel:"a", genres:["soba"], name:"玉乃屋", shade:"shade",
+  {id:"tamanoya", ll:[35.668135,139.549867], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13055725/", panel:"a", genres:["soba"], name:"玉乃屋", shade:"shade",
    status:"open", rating:"3.8 / 493件", hours:"10:00–15:30（月休）／ 現金のみ",
    note:"十割そばと鴨。屋外席があり、地ビールの深大寺ビールを置いている。神代植物公園の正門前。",
    map:"https://maps.google.com/?cid=5327721191104570701"},
-  {id:"yusui", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13010191/", panel:"a", genres:["soba"], name:"湧水", shade:"in",
+  {id:"yusui", ll:[35.667654,139.546861], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13010191/", panel:"a", genres:["soba"], name:"湧水", shade:"in",
    status:"open", rating:"4.1 / 2,358件", hours:"10:30–18:00（木休）／ 現金・PayPay",
    note:"参道でもっとも名の知れた店。開店直後から行列ができるが、席数があり回転は速い。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+湧水"},
-  {id:"matsuba", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13033267/", panel:"a", genres:["soba"], name:"松葉茶屋", shade:"shade",
+  {id:"matsuba", ll:[35.668145,139.54963], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13033267/", panel:"a", genres:["soba"], name:"松葉茶屋", shade:"shade",
    status:"open", rating:"4.2 / 578件", hours:"9:30–16:30（月休）／ カード可",
    note:"神代植物公園の深大寺門側、坂を上がった先。屋外席があり、犬を連れて入れる。参道の店より空いていることが多い。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+松葉茶屋"},
-  {id:"daishi", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13032191/", panel:"a", genres:["soba"], name:"大師茶屋", shade:"in",
+  {id:"daishi", ll:[35.667749,139.54754], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13032191/", panel:"a", genres:["soba"], name:"大師茶屋", shade:"in",
    status:"open", rating:"4.2 / 767件", hours:"10:30–15:00（水休）／ 現金のみ",
    note:"盛りが多い。十割は数量限定で、昼前に売り切れることがある。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+大師茶屋"},
-  {id:"ikkyuan", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13016209/", panel:"a", genres:["soba","dango"], name:"一休庵", shade:"in",
+  {id:"ikkyuan", ll:[35.667432,139.549416], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13016209/", panel:"a", genres:["soba","dango"], name:"一休庵", shade:"in",
    status:"open", rating:"4.0 / 606件", hours:"11:00–15:00（月休）／ 現金のみ",
    note:"水車のある古い建物。そばは十割・九割・八割から選べ、冷たいつけ汁で出す。そば粉で作った団子はみたらしと胡麻の二種のたれで、胡麻を推す声が多い。そば茶が付く。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+一休庵"},
-  {id:"tamon", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13010173/", panel:"a", genres:["soba"], name:"多聞", shade:"shade",
+  {id:"tamon", ll:[35.666307,139.551459], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13010173/", panel:"a", genres:["soba"], name:"多聞", shade:"shade",
    status:"open", rating:"3.9 / 1,137件", hours:"10:00–15:30（月休）／ 現金のみ",
    note:"参道から少し離れた大きめの店。屋外席がいくつかあり、店内で土産物も扱う。盛りは多め。英語が通じる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+多聞"},
-  {id:"kiyoshi", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13068195/", panel:"a", genres:["soba"], name:"深大寺そば きよし", shade:"in",
+  {id:"kiyoshi", ll:[35.667098,139.548576], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13068195/", panel:"a", genres:["soba"], name:"深大寺そば きよし", shade:"in",
    status:"open", rating:"4.0 / 482件", hours:"11:00–18:30（月・火休）／ カード可",
    note:"小体な店。海老天そばと鴨そばに評価が集まる。年末年始や行事の日は長く並ぶ。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺そば+きよし"},
-  {id:"yaoki", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13057896/", panel:"a", genres:["dango","soba"], name:"八起", shade:"water",
+  {id:"yaoki", ll:[35.666885,139.550256], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13057896/", panel:"a", genres:["dango","soba"], name:"八起", shade:"water",
    status:"open", rating:"3.6 / 278件", hours:"10:00–15:00（火・水休）／ 現金のみ ／ 042-482-0141",
    note:"山門の横。池に面した席がある。そばのほか、そば粉の団子と餅を出す。冷たいそばと温かいそばを選べる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+八起"},
-  {id:"ameya", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13090474/", panel:"a", genres:["dango"], name:"あめや", shade:"sun",
+  {id:"ameya", ll:[35.667263,139.549733], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13090474/", panel:"a", genres:["dango"], name:"あめや", shade:"sun",
    status:"open", rating:"4.0 / 103件", hours:"10:00–15:00（月・木休）／ 現金のみ",
    note:"山門の並び。そばパンは野沢菜やキーマカレーを包んだ惣菜系で、甘めのもっちりした生地。焼き草もち、そばまんじゅうも並ぶ。席はなく、店先で立って食べる。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+あめや"},
-  {id:"baigetsu", area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13193648/", panel:"a", genres:["dango"], name:"梅月", shade:"in",
+  {id:"baigetsu", ll:[35.667281,139.549043], area:"sando", tabelog:"https://tabelog.com/tokyo/A1326/A132601/13193648/", panel:"a", genres:["dango"], name:"梅月", shade:"in",
    status:"open", rating:"4.1 / 41件", hours:"毎日 10:00–17:00 ／ 現金のみ",
    note:"バス停のそばの老舗。こしあんを薄い皮で包んだそばまんじゅうが看板。大判焼きは150円ほど、甘酒あめも扱う。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+梅月"},
-  {id:"gyokusendo", area:"sando", panel:"a", genres:["dango"], name:"玉泉堂", shade:"in",
+  {id:"gyokusendo", ll:[35.667368,139.546985], area:"sando", panel:"a", genres:["dango"], name:"玉泉堂", shade:"in",
    status:"check", rating:"4.8 / 12件", hours:"不定期（旗が出ていれば営業）",
    note:"湧水の向かい。挽きたてのそば粉を使った焼き菓子を手作りで少量ずつ出す。ガレットやマドレーヌなど洋菓子寄り。",
    map:"https://www.google.com/maps/search/?api=1&query=深大寺+玉泉堂"},
-  {id:"jindaiji", area:"sando", panel:"a", noFood:true, genres:["jisha"], name:"深大寺", shade:"in",
+  {id:"jindaiji", ll:[35.667505,139.550394], area:"sando", panel:"a", noFood:true, genres:["jisha"], name:"深大寺", shade:"in",
    status:"open", rating:"4.3 / 8,540件", hours:"毎日 6:00–17:00",
    note:"国宝の釈迦如来倚像は釈迦堂で拝観300円。元三大師堂では日に数回の護摩祈願がある。御朱印は当面すべて書き置きの紙朱印で、朱印帳への直書きはしていない。",
    map:"https://maps.google.com/?cid=8224161598012187145"},
 
   /* ===== 神代植物公園 ===== */
-  {id:"jindaipark", area:"park", panel:"a", noFood:true, genres:["teien"], name:"神代植物公園", shade:"shade",
+  {id:"jindaipark", ll:[35.671281,139.548348], area:"park", panel:"a", noFood:true, genres:["teien"], name:"神代植物公園", shade:"shade",
    status:"open", rating:"4.3 / 6,486件", hours:"9:30–17:00（最終入園16:00・月休）／ 500円",
    note:"武蔵野の雑木林が残る都立の植物公園。ばら園は約400種5,200株で、秋バラは10月から11月中旬。かえで園の紅葉は11月下旬から。大温室は熱帯植物を集めた屋内施設で、冷えた日の避難先になる。",
    map:"https://maps.google.com/?cid=9763061280357406539"},
-  {id:"suisei", area:"park", panel:"a", noFood:true, genres:["teien"], name:"水生植物園", shade:"water",
+  {id:"suisei", ll:[35.665887,139.551481], area:"park", panel:"a", noFood:true, genres:["teien"], name:"水生植物園", shade:"water",
    status:"open", rating:"4.1 / 176件", hours:"9:30–16:30（月休）／ 無料",
    note:"深大寺から東へ徒歩5分の湿地に木道が渡されている。湧水と深大寺城跡があり、神代植物公園の一部だが入園は無料。",
    map:"https://maps.google.com/?cid=5473221735308242460"},
-  {id:"greensalon", area:"park", panel:"a", genres:["teien"], name:"グリーンサロン", shade:"in",
+  {id:"greensalon", ll:[35.672187,139.546387], area:"park", panel:"a", genres:["teien"], name:"グリーンサロン", shade:"in",
    status:"open", rating:"3.8 / 33件", hours:"9:30–17:00（月休）",
    note:"神代植物公園の園内カフェ。深大寺養蜂園のはちみつを使ったカレーが名物。屋内席とテラス席があり、先に注文して席で待つ方式。",
    map:"https://maps.google.com/?cid=15233203860007683140"},
 
   /* ===== 調布駅前・天神通り ===== */
-  {id:"anand", area:"chofu", panel:"b", genres:["dango"], name:"甘味an&", shade:"in",
+  {id:"anand", ll:[35.653867,139.544708], area:"chofu", panel:"b", genres:["dango"], name:"甘味an&", shade:"in",
    status:"open", rating:"3.9 / 36件", hours:"11:00–21:00",
    note:"あんみつやぜんざいなどの甘味処。かき氷は季節の素材で通年出しており、氷の中にも具が仕込まれる。あずきや安藤の姉妹店で、2022年開店。夜21時まで開いている。",
    map:"https://maps.google.com/?cid=12442747606617253566"},
-  {id:"azukiya", area:"chofu", panel:"b", genres:["dango"], name:"あずきや安藤", shade:"sun",
+  {id:"azukiya", ll:[35.653837,139.544588], area:"chofu", panel:"b", genres:["dango"], name:"あずきや安藤", shade:"sun",
    status:"open", rating:"4.0 / 207件", hours:"毎日 10:30–18:30",
    note:"北海道産の小豆を銅釜で炊いた粒あんの今川焼。生地に黒ごまが入る。200円ほど。冷える時季は焼きたてが効く。テイクアウト専門で席はない。",
    map:"https://maps.google.com/?cid=16583204490180936106"},
-  {id:"kitaro", area:"chofu", panel:"b", genres:["dango"], name:"鬼太郎茶屋", shade:"in",
+  {id:"kitaro", ll:[35.654057,139.544768], area:"chofu", panel:"b", genres:["dango"], name:"鬼太郎茶屋", shade:"in",
    status:"open", rating:"4.1 / 1,504件", hours:"10:00–18:00 ／ 042-482-4059",
    note:"妖怪をモチーフにした甘味とグッズの店。グッズは350種類以上。深大寺の参道にあった店舗は2024年8月に閉店し、同年11月に天神通りへ移転した。",
    map:"https://maps.google.com/?cid=6072209734608962775"},
-  {id:"kumokuma", area:"chofu", panel:"b", genres:["dango"], name:"パクパクくもくま堂", shade:"in",
+  {id:"kumokuma", ll:[35.654723,139.547804], area:"chofu", panel:"b", genres:["dango"], name:"パクパクくもくま堂", shade:"in",
    status:"open", rating:"4.1 / 176件", hours:"月・火休 ／ 通年営業",
    note:"クマの形のかき氷で知られる専門店。冬もやっており、秋は焼き芋やモンブランなど季節の味が出る。メニューは日替わりで6種ほど。LINEか電話で予約できる。調布駅から徒歩10分弱。",
    map:"https://maps.google.com/?cid=1990523650059546140"},
-  {id:"oimono", area:"chofu", panel:"b", genres:["dango"], name:"おいものおうち 調布店", shade:"in",
+  {id:"oimono", ll:[35.654286,139.547242], area:"chofu", panel:"b", genres:["dango"], name:"おいものおうち 調布店", shade:"in",
    status:"open", rating:"4.7 / 131件", hours:"11:30–19:00（火・水休）",
    note:"焼き芋の専門店。さつまいものスムージーやスープ、大福もある。イートインの席がある。",
    map:"https://www.google.com/maps/search/?api=1&query=おいものおうち+調布店"}
@@ -578,6 +617,7 @@ function render(){
   /* バス・現金メモは「すべて」のときだけ出す */
   const isAll = current === "all";
   document.querySelectorAll(".bus, .bus-alert.solo").forEach(el => { el.hidden = !isAll; });
+  if(typeof updateMap === "function") updateMap();
 }
 
 rowEl.addEventListener("click", e => {
@@ -612,6 +652,144 @@ render();
   (hit || items[0]).open = true;
 })();
 
+
+
+/* ── 地図（Leaflet。初めて開いたときだけ読み込む） ─────────── */
+const mapBox  = document.getElementById("mapbox");
+const mapNote = document.getElementById("map-note");
+const MAP_NOTE = mapNote.textContent;
+const MAP_AREA_IDS = {sando:["sando","park"], chofu:["chofu"]};
+/* render() が先に呼ばれるので、初期化前でも参照できる var にしている */
+var map = null, pinLayer = null, meDot = null, mapArea = "sando";
+
+function loadAsset(tag, attrs){
+  return new Promise((ok, ng) => {
+    const el = document.createElement(tag);
+    Object.assign(el, attrs);
+    el.onload = ok; el.onerror = ng;
+    document.head.appendChild(el);
+  });
+}
+async function ensureLeaflet(){
+  if(window.L) return;
+  await Promise.all([
+    loadAsset("link",   {rel:"stylesheet", href:"vendor/leaflet/leaflet.css"}),
+    loadAsset("script", {src:"vendor/leaflet/leaflet.js"})
+  ]);
+}
+
+/* 表示中の店を「ピン1つ＝1か所」にまとめる（pinWith は同じ場所のもの） */
+function pinGroups(){
+  const g = new Map();
+  visible().forEach(s => {
+    const key = s.pinWith || s.id;
+    if(!g.has(key)) g.set(key, []);
+    g.get(key).push(s);
+  });
+  return Array.from(g, ([key, members]) => ({target: BY_ID[key], members})).filter(p => p.target.ll);
+}
+
+function goCard(id){
+  const art = document.getElementById("c-" + id);
+  if(!art) return;
+  mapBox.open = false;   /* 先に畳んでから位置を測る */
+  art.querySelector("details").open = true;
+  const y = art.getBoundingClientRect().top + window.scrollY - 88;
+  window.scrollTo({top: y, behavior: "instant"});
+}
+
+function popupFor(p){
+  const box = document.createElement("div");
+  const t = document.createElement("div");
+  t.className = "pop-t"; t.textContent = p.target.name;
+  box.appendChild(t);
+  const single = p.members.length === 1 && p.members[0] === p.target;
+  p.members.forEach(m => {
+    const b = document.createElement("button");
+    b.type = "button"; b.className = "pop-b main";
+    b.textContent = single ? "詳しく見る" : (m === p.target ? m.name + "（詳細）" : m.name);
+    b.addEventListener("click", () => goCard(m.id));
+    box.appendChild(b);
+  });
+  const a = document.createElement("a");
+  a.className = "pop-b"; a.href = p.target.map; a.target = "_blank"; a.rel = "noopener";
+  a.textContent = "Googleマップで開く";
+  box.appendChild(a);
+  return box;
+}
+
+function drawPins(){
+  pinLayer.clearLayers();
+  pinGroups().forEach(p => {
+    const g = p.target.genres[0];
+    L.marker(p.target.ll, {
+      title: p.target.name, alt: p.target.name,
+      icon: L.divIcon({
+        className: "pin-wrap", iconSize: [30,30], iconAnchor: [15,15], popupAnchor: [0,-14],
+        html: `<span class="pin pin-${g}"><svg viewBox="0 0 24 24" aria-hidden="true">${ICON[g]}</svg></span>`
+      })
+    }).bindPopup(() => popupFor(p), {closeButton:false, autoPanPadding:[16,70]}).addTo(pinLayer);
+  });
+}
+
+function fitArea(){
+  const ids = MAP_AREA_IDS[mapArea];
+  let pts = pinGroups().filter(p => ids.includes(p.target.area)).map(p => p.target.ll);
+  if(!pts.length) pts = pinGroups().map(p => p.target.ll);
+  if(pts.length) map.fitBounds(pts, {padding:[36,36], maxZoom:17});
+}
+
+function setMapArea(a){
+  mapArea = a;
+  document.querySelectorAll(".map-tools [data-map]").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.map === a)));
+}
+
+/* 絞り込みを変えたとき：ピンを入れ替え、その絞り込みに場所がある方のエリアへ寄せる */
+function updateMap(){
+  if(!map) return;
+  drawPins();
+  const has = k => pinGroups().some(p => MAP_AREA_IDS[k].includes(p.target.area));
+  if(!has(mapArea)) setMapArea(mapArea === "sando" ? "chofu" : "sando");
+  fitArea();
+}
+
+async function openMap(){
+  if(!map){
+    try{ await ensureLeaflet(); }
+    catch(_){ mapNote.textContent = "地図を読み込めませんでした。電波のある場所で一度開くと、次から使えます。"; return; }
+    map = L.map("map", {zoomControl:true, minZoom:13, maxZoom:19});
+    map.attributionControl.setPrefix(false);
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom:19, crossOrigin:true,
+      attribution:'© <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors'
+    }).addTo(map);
+    pinLayer = L.layerGroup().addTo(map);
+    updateMap();
+  }else{
+    map.invalidateSize();
+  }
+}
+mapBox.addEventListener("toggle", () => { if(mapBox.open) openMap(); });
+
+document.querySelector(".map-tools").addEventListener("click", e => {
+  const b = e.target.closest("button");
+  if(!b || !map) return;
+  if(b.dataset.map){ setMapArea(b.dataset.map); fitArea(); }
+});
+document.getElementById("map-me").addEventListener("click", () => {
+  if(!map) return;
+  if(!navigator.geolocation){ mapNote.textContent = "この端末では現在地を取得できません。"; return; }
+  mapNote.textContent = "現在地を探しています…";
+  navigator.geolocation.getCurrentPosition(pos => {
+    const ll = [pos.coords.latitude, pos.coords.longitude];
+    if(meDot) meDot.setLatLng(ll);
+    else meDot = L.circleMarker(ll, {radius:8, color:"#fff", weight:3, fillColor:"#2F7DE1", fillOpacity:1}).addTo(map);
+    map.setView(ll, Math.max(map.getZoom(), 16));
+    mapNote.textContent = MAP_NOTE;
+  }, () => {
+    mapNote.textContent = "現在地を取得できませんでした。iPhoneの設定で、Safari（またはこのアプリ）の位置情報を許可してください。";
+  }, {enableHighAccuracy:true, timeout:15000, maximumAge:30000});
+});
 
 /* ── 天気（Open-Meteo・深大寺） ─────────────── */
 const wxEl   = document.getElementById("wx");

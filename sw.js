@@ -1,8 +1,11 @@
 /* 深大寺MAP：圏外でも開けるようにするための Service Worker
    ・ページ本体は「ネット優先（3秒で待ちきれなければ保存分）」
    ・写真・フォント・地図タイルなどは「保存分を先に出し、裏で更新」 */
-const VERSION = "jindaiji-v1";
-const PRECACHE = ["./", "index.html", "hero.jpg", "manifest.json", "icon-192.png", "apple-touch-icon.png"];
+const VERSION = "jindaiji-v2";
+const TILES = "jindaiji-tiles";   /* 見た範囲の地図タイル（バージョンが変わっても消さない） */
+const TILE_MAX = 400;
+const PRECACHE = ["./", "index.html", "hero.jpg", "manifest.json", "icon-192.png", "apple-touch-icon.png",
+  "vendor/leaflet/leaflet.js", "vendor/leaflet/leaflet.css"];
 const CACHEABLE_HOSTS = ["fonts.googleapis.com", "fonts.gstatic.com"];
 
 self.addEventListener("install", (e) => {
@@ -12,7 +15,7 @@ self.addEventListener("install", (e) => {
 self.addEventListener("activate", (e) => {
   e.waitUntil(
     caches.keys()
-      .then((keys) => Promise.all(keys.filter((k) => k !== VERSION).map((k) => caches.delete(k))))
+      .then((keys) => Promise.all(keys.filter((k) => k !== VERSION && k !== TILES).map((k) => caches.delete(k))))
       .then(() => self.clients.claim())
   );
 });
@@ -42,6 +45,19 @@ async function staleWhileRevalidate(req) {
   return hit || (await update) || Response.error();
 }
 
+async function tileFetch(req) {
+  const cache = await caches.open(TILES);
+  const hit = await cache.match(req);
+  if (hit) return hit;
+  const res = await fetch(req);
+  if (res && res.ok) {
+    cache.put(req, res.clone());
+    const keys = await cache.keys();
+    if (keys.length > TILE_MAX) await Promise.all(keys.slice(0, keys.length - TILE_MAX).map((k) => cache.delete(k)));
+  }
+  return res;
+}
+
 self.addEventListener("fetch", (e) => {
   const req = e.request;
   if (req.method !== "GET") return;
@@ -49,6 +65,10 @@ self.addEventListener("fetch", (e) => {
 
   if (req.mode === "navigate") {
     e.respondWith(networkFirst(req, 3000));
+    return;
+  }
+  if (url.hostname === "tile.openstreetmap.org") {
+    e.respondWith(tileFetch(req));
     return;
   }
   if (url.origin === location.origin || CACHEABLE_HOSTS.includes(url.hostname)) {

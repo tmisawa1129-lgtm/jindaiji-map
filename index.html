@@ -260,15 +260,11 @@ footer b{color:var(--ink-2)}
 
   <section class="area months">
     <div class="area-head">
-      <h2>🍂 9月〜11月の見どころ</h2>
+      <h2>🍂 10月〜11月の見どころ</h2>
     </div>
     <div class="area-rule"></div>
 
     <div class="bus-card" id="months-list">
-      <details class="mo" data-from="09-01" data-to="09-30">
-        <summary class="mo-h"><span class="mo-m">9月</span><span class="mo-t">最高28℃前後 ／ 夏の名残</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-        <div class="mo-b">はぎ園の萩が10品種110株、8月から10月上旬まで咲き継ぐ。キキョウやオミナエシなど秋の七草も同じ頃。ダリアが咲きはじめ、かき氷もまだおいしい。夏と秋が重なる時季。</div>
-      </details>
       <details class="mo" data-from="10-01" data-to="10-15">
         <summary class="mo-h"><span class="mo-m">10月 上旬〜中旬</span><span class="mo-t">最高25℃前後 ／ 汗ばむ日もある</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="mo-b">秋のバラフェスタが開幕する。金木犀が香りはじめ、萩やダリアもまだ見られる。日中は半袖でも歩ける陽気が残る。</div>
@@ -606,7 +602,7 @@ rowEl.addEventListener("click", e => {
 
 render();
 
-/* 「9月〜11月の見どころ」は今日にあたる期間だけ開いておく */
+/* 「10月〜11月の見どころ」は今日にあたる期間だけ開いておく */
 (() => {
   const items = document.querySelectorAll("#months-list .mo");
   const md = new Date().toLocaleDateString("sv-SE", {timeZone:"Asia/Tokyo"}).slice(5); // "MM-DD"

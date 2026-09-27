@@ -138,6 +138,10 @@ a{color:inherit}
 .area-head h2{font-family:var(--disp);font-size:20px;font-weight:700;letter-spacing:.02em}
 .area-head .area-sub{font-size:11.5px;color:var(--ink-3);letter-spacing:.01em}
 .area-rule{height:2px;background:var(--ai);margin-bottom:18px}
+details.area>summary{cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+details.area>summary::-webkit-details-marker{display:none}
+.area-chev{margin-left:auto;align-self:center;width:18px;height:18px;flex:none;fill:none;stroke:var(--ink-3);stroke-width:2;stroke-linecap:round;stroke-linejoin:round;transition:transform .15s}
+details.area[open]>summary .area-chev{transform:rotate(180deg)}
 
 .card{
   position:relative;background:var(--card);border:1px solid var(--line);
@@ -589,15 +593,18 @@ function cardHtml(s){
 
 function render(){
   let total = 0;
+  const items0 = visible();
+  /* 「すべて」のときはエリア見出しだけ見せて畳んでおく。絞り込み中は該当エリアを開く */
+  const openByDefault = current !== "all";
   listEl.innerHTML = AREAS.map(area => {
-    const items = visible().filter(s => s.area === area.id);
+    const items = items0.filter(s => s.area === area.id);
     if(!items.length) return "";
     total += items.length;
-    return `<section class="area">
-        <div class="area-head"><h2>${area.name}</h2><span class="area-sub">${area.sub}</span></div>
+    return `<details class="area"${openByDefault ? " open" : ""}>
+        <summary class="area-head"><h2>${area.name}</h2><span class="area-sub">${area.sub}</span><svg class="area-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="area-rule"></div>
         ${items.map(cardHtml).join("")}
-      </section>`;
+      </details>`;
   }).join("");
   emptyEl.hidden = total > 0;
 
@@ -679,6 +686,8 @@ function goCard(id){
   const art = document.getElementById("c-" + id);
   if(!art) return;
   mapBox.open = false;   /* 先に畳んでから位置を測る */
+  const areaDetails = art.closest("details.area");
+  if(areaDetails) areaDetails.open = true;
   art.querySelector("details").open = true;
   const y = art.getBoundingClientRect().top + window.scrollY - 88;
   window.scrollTo({top: y, behavior: "instant"});

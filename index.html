@@ -100,11 +100,6 @@ a{color:inherit}
 .wx-live b{font-size:13px;font-weight:700;color:var(--ink)}
 .wx-live .wx-live-t{color:var(--ink-2)}
 .wx-live-note{width:100%;margin-top:2px;line-height:1.6;opacity:.9}
-.legend{display:flex;flex-wrap:wrap;gap:6px 18px;padding:26px 0 0}
-.legend-item{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-2)}
-.chip-band{width:7px;height:7px;border-radius:50%;flex:none}
-.b-in{background:var(--ai)} .b-shade{background:var(--koke)}
-.b-water{background:var(--mizu)} .b-sun{background:var(--shu)}
 
 /* ---------- 絞り込み：下部固定タブバー ---------- */
 .tabs{
@@ -323,13 +318,6 @@ footer b{color:var(--ink-2)}
       <p class="map-note" id="map-note">ピンをタップすると詳細へ移れます。電波が弱いと地図の下地は出ませんが、ピンは表示されます（一度見た範囲は端末に保存されます）。</p>
     </div>
   </details>
-
-  <div class="legend">
-    <span class="legend-item"><i class="chip-band b-in"></i>屋内</span>
-    <span class="legend-item"><i class="chip-band b-shade"></i>外席あり</span>
-    <span class="legend-item"><i class="chip-band b-water"></i>水辺</span>
-    <span class="legend-item"><i class="chip-band b-sun"></i>日当たり</span>
-  </div>
 
   <main id="list"></main>
   <p class="empty" id="empty" hidden>この条件に合うものはない。</p>

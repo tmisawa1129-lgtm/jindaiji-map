@@ -834,8 +834,7 @@ function renderWeather(d, stale, savedAt){
       const [nowIcon, nowLabel] = WX_CODE[d.current.weather_code] || ["🌡️","—"];
       liveEl.innerHTML = `<span>いま ${d.current.time.slice(11,16)}</span>`
         + `<span class="wx-live-t">${nowIcon} ${nowLabel}</span>`
-        + `<b>${Math.round(d.current.temperature_2m)}℃</b>`
-        + `<span class="wx-live-note">上の枠は一日の目安。降水確率はその日の最大値で、朝から降るという意味ではない。</span>`;
+        + `<b>${Math.round(d.current.temperature_2m)}℃</b>`;
       liveEl.hidden = false;
     }
 }

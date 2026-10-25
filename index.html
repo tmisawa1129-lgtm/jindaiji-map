@@ -292,14 +292,6 @@ footer b{color:var(--ink-2)}
     <div class="area-rule"></div>
 
     <div class="bus-card" id="months-list">
-      <details class="mo" data-from="10-01" data-to="10-15">
-        <summary class="mo-h"><span class="mo-m">10月上旬</span><span class="mo-t">最高25℃前後 ／ 汗ばむ日もある</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-        <div class="mo-b">秋のバラフェスタが開幕する。金木犀が香りはじめ、萩やダリアもまだ見られる。日中は半袖でも歩ける陽気が残る。</div>
-      </details>
-      <details class="mo" data-from="10-16" data-to="10-31">
-        <summary class="mo-h"><span class="mo-m">10月下旬</span><span class="mo-t">最高20℃前後 ／ 空気が澄む</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
-        <div class="mo-b">ダリアが本番を迎え、秋晴れの日が増える。人出も落ち着いていて、一年でいちばん歩きやすい時季。</div>
-      </details>
       <details class="mo" data-from="11-01" data-to="11-15">
         <summary class="mo-h"><span class="mo-m">11月上旬</span><span class="mo-t">最高18〜15℃ ／ 過ごしやすい</span><svg class="mo-chev" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></summary>
         <div class="mo-b"><b>新そばが出はじめ、もみじが色づきはじめる。</b>菊花大会と秋バラの終盤も重なり、園内はいちばん花の種類が多い頃。</div>
@@ -381,7 +373,7 @@ const SHOPS = [
    map:"https://maps.google.com/?cid=8224161598012187145"},
   {id:"sobamatsuri", area:"sando", panel:"a", noFood:true, pinWith:"jindaiji", genres:["aki","soba"], name:"深大寺そばまつり", shade:"sun",
    status:"check", statusText:"例年11月下旬", hours:"深大寺 境内・参道",
-   note:"新そばの時季に合わせて例年11月下旬から12月上旬に開かれる。期間中は境内でそば守観音の供養祭があり、献上したそばが振る舞われる回もある。日程は年ごとに動くので深大寺の公式で確認を。",
+   note:"新そばの時季に合わせて例年11月下旬に開かれる（2025年は11/22〜11/30）。期間中は境内でそば守観音の供養祭があり、献上したそばが振る舞われる回もある。日程は年ごとに動くので深大寺の公式で確認を。",
    map:"https://maps.google.com/?cid=8224161598012187145"},
   {id:"jinja", ll:[35.667838,139.548647], area:"sando", panel:"a", noFood:true, genres:["jisha"], name:"深沙堂", shade:"water",
    status:"open", statusText:"通年・無料", hours:"境内西端 ／ 終日",
@@ -638,7 +630,7 @@ rowEl.addEventListener("click", e => {
 
 render();
 
-/* 「10月〜11月の見どころ」は今日にあたる期間だけ開いておく */
+/* 「秋の見どころ」は今日にあたる期間だけ開いておく */
 (() => {
   const items = document.querySelectorAll("#months-list .mo");
   const md = new Date().toLocaleDateString("sv-SE", {timeZone:"Asia/Tokyo"}).slice(5); // "MM-DD"
